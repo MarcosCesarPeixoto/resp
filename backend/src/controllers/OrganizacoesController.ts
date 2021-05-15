@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, raw, Request, Response } from 'express';
 import knex from 'knex';
 import db from '../database/connections';
 
@@ -12,15 +12,29 @@ export default class OrganizacoesController{
       let organizacoes = null;
       if (conteudo_busca) {
         // buscar pelo conteúdo informado
-         organizacoes = await db('organizacao')
-          // .whereRaw("(razaosocial_org like '%" + conteudo_busca + "%') or (id > 40)");      
-          .whereRaw("(razaosocial_org like '%" + conteudo_busca + "%')");      
+
+        // organizacoes = await db('organizacao')
+          // .leftOuterJoin('organizacao_tag', 'organizacao.id_org', 'organizacao_tag.id_org')
+          // .leftOuterJoin('tag', 'tag.id_tag', 'organizacao_tag.id_tag')
+          // .whereRaw("(razaosocial_org like '%" + conteudo_busca + "%') or (tag like '%" + conteudo_busca + "%')")
+          // .groupBy('organizacao_tag.id_org');
+
+          //--
+
+          organizacoes = await db.select('organizacao.*', 'tag.*')
+            .from('organizacao')
+            .leftOuterJoin('organizacao_tag', 'organizacao.id_org', 'organizacao_tag.id_org')
+            .leftOuterJoin('tag', 'tag.id_tag', 'organizacao_tag.id_tag')
+            .whereRaw("(organizacao.razaosocial_org like '%" + conteudo_busca + "%') or (tag like '%" + conteudo_busca + "%')")
+            .groupBy('organizacao.id_org');
+
       } else {
         // busca tudo
          organizacoes = await db('organizacao');
       }
 
       return res.json(organizacoes);  
+      
     } catch (error) {
       next(error);
     }

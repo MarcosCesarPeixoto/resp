@@ -5,7 +5,7 @@ import db from '../database/connections';
 export default class TagsController{
   async create(req: Request, res: Response) {
     
-    const {          
+    const {
       tag
     } = req.body;
   
@@ -20,14 +20,13 @@ export default class TagsController{
       
       return res.status(201).send();
   
-    } catch (err) {
+    } catch(err) {
       // console.log(err);
       await trx.rollback();
       
       return res.status(400).json({      
         error: 'Erro inesperado ao inserir nova tag: ' + err
-      });
-   
+      });   
     }  
   
     return res.send();
