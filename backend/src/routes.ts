@@ -3,12 +3,14 @@ import OrganizacoesController from './controllers/OrganizacoesController';
 import ColaboradoresController from './controllers/ColaboradoresController';
 import TagsController from './controllers/TagsController';
 import AtendimentosController from './controllers/AtendimentosController';
+import UserController from './controllers/UserController';
 
 const routes = express.Router();
 const organizacoesController = new OrganizacoesController();
 const tagsController = new TagsController();
 const colaboradoresController = new ColaboradoresController();
 const atendimentosController = new AtendimentosController();
+const userController = new UserController();
 
 routes.get('/', (req, res) => {
   return res.json({message: 'Rota Principal'});  
@@ -30,5 +32,10 @@ routes.post('/atendimentos', atendimentosController.create);
 routes.get('/atendimentos', atendimentosController.index);
 routes.put('/atendimentos/:id_atd', atendimentosController.update);
 routes.delete('/atendimentos/:id_atd', atendimentosController.delete);
+
+routes.post('/usuarios', userController.create);
+routes.get('/usuarios', userController.index);
+routes.put('/usuarios/:id_usu', userController.update);
+routes.delete('/usuarios/:id_usu', userController.delete);
 
 export default routes;

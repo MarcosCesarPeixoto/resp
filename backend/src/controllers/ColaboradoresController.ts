@@ -6,7 +6,6 @@ export default class ColaboradoresController{
 
   // Método POST
   async create(req: Request, res: Response) {
-
     const {
       nome_colab,
       email_colab,
@@ -120,6 +119,5 @@ export default class ColaboradoresController{
       next(error);
     }
   }
-  
 
 };
