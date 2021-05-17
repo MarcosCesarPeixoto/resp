@@ -4,6 +4,7 @@ import ColaboradoresController from './controllers/ColaboradoresController';
 import TagsController from './controllers/TagsController';
 import AtendimentosController from './controllers/AtendimentosController';
 import UserController from './controllers/UserController';
+import FavoritosController from './controllers/FavoritosController';
 
 const routes = express.Router();
 const organizacoesController = new OrganizacoesController();
@@ -11,6 +12,7 @@ const tagsController = new TagsController();
 const colaboradoresController = new ColaboradoresController();
 const atendimentosController = new AtendimentosController();
 const userController = new UserController();
+const favoritosController = new FavoritosController();
 
 routes.get('/', (req, res) => {
   return res.json({message: 'Rota Principal'});  
@@ -37,5 +39,11 @@ routes.post('/usuarios', userController.create);
 routes.get('/usuarios', userController.index);
 routes.put('/usuarios/:id_usu', userController.update);
 routes.delete('/usuarios/:id_usu', userController.delete);
+
+routes.post('/favoritos', favoritosController.create);
+routes.put('/favoritos/:usuario_fav/organizacao/:organizacao_fav', favoritosController.update);
+routes.delete('/favoritos/:usuario_fav/organizacao/:organizacao_fav', favoritosController.delete);
+
+// /users/:userId/books/:bookId
 
 export default routes;

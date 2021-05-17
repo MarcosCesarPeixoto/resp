@@ -85,9 +85,11 @@ export default class UserController{
         console.log(id_usu);
   
         await db('usuario')
-        //.delete()  -- passando a fazer um falso delete, atualizando o campo dh_delete_usu com data/hora que usuário solicitou deleção
-        .where( { id_usu })
-        .update('dh_delete_usu', 123);
+        // .delete()  // -- passando a fazer um falso delete, atualizando o campo dh_delete_usu com data/hora que usuário solicitou deleção
+        // .update('dh_delete_usu', 123)
+        .update('dh_delete_usu', new Date())
+        .where({ id_usu });
+        
   
         return res.send();
   

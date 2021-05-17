@@ -111,7 +111,7 @@ export default class ColaboradoresController{
 
       await db('colaborador')
       .delete()
-      .where( { id_colab });
+      .where({ id_colab });
 
       return res.send();
 
