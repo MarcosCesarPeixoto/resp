@@ -1,0 +1,63 @@
+:root {
+
+/* Colors: */
+--color-preto: #000000;
+--color-azul: #04546E;
+--color-cinza: #707070;
+--color-cinza-claro: #C7B7B7;
+
+/* Font/text values */
+--font-nunito-sans: Nunito Sans;
+--font-syle-normal: normal;
+--font-weight-800: 800px;
+--font-weight-normal: normal;
+--font-weight-bold: bold;
+--font-size-20: 20px;
+--font-size-25: 25px;
+--font-size-30: 30px;
+--character-spacing-0: 0px;
+--line-spacing-27: 27px;
+--line-spacing-34: 34px;
+--line-spacing-40: 40px;
+}
+
+/* Character Styles */
+.character-style-1 {
+font-family: var(--font-nunito-sans);
+font-style: var(--font-syle-normal);
+font-weight: var(--font-weight-normal);
+font-size: var(--font-size-20);
+line-height: var(--line-spacing-27);
+letter-spacing: var(--character-spacing-0);
+color: var(--color-preto);
+}
+
+.character-style-2 {
+font-family: var(--font-nunito-sans);
+font-style: var(--font-syle-normal);
+font-weight: var(--font-weight-800);
+font-size: var(--font-size-20);
+line-height: var(--line-spacing-27);
+letter-spacing: var(--character-spacing-0);
+color: var(--color-preto);
+}
+
+.character-style-3 {
+font-family: var(--font-nunito-sans);
+font-style: var(--font-syle-normal);
+font-weight: var(--font-weight-800);
+font-size: var(--font-size-25);
+line-height: var(--line-spacing-34);
+letter-spacing: var(--character-spacing-0);
+color: var(--color-preto);
+}
+
+.character-style-4 {
+font-family: var(--font-nunito-sans);
+font-style: var(--font-syle-normal);
+font-weight: var(--font-weight-bold);
+font-size: var(--font-size-30);
+line-height: var(--line-spacing-40);
+letter-spacing: var(--character-spacing-0);
+color: var(--color-preto);
+}

@@ -1,0 +1,60 @@
+:root {
+
+/* Colors: */
+--unnamed-color-000000: #000000;
+--unnamed-color-04546e: #04546E;
+--unnamed-color-707070: #707070;
+--unnamed-color-c7b7b7: #C7B7B7;
+
+/* Font/text values */
+--unnamed-font-family-nunito-sans: Nunito Sans;
+--unnamed-font-style-normal: normal;
+--unnamed-font-weight-800: 800px;
+--unnamed-font-weight-normal: normal;
+--unnamed-font-weight-bold: bold;
+--unnamed-font-size-20: 20px;
+--unnamed-font-size-25: 25px;
+--unnamed-font-size-30: 30px;
+--unnamed-character-spacing-0: 0px;
+--unnamed-line-spacing-27: 27px;
+--unnamed-line-spacing-34: 34px;
+--unnamed-line-spacing-40: 40px;
+}
+
+/* Character Styles */
+.unnamed-character-style-1 {
+font-family: var(--unnamed-font-family-nunito-sans);
+font-style: var(--unnamed-font-style-normal);
+font-weight: var(--unnamed-font-weight-normal);
+font-size: var(--unnamed-font-size-20);
+line-height: var(--unnamed-line-spacing-27);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+}
+.unnamed-character-style-2 {
+font-family: var(--unnamed-font-family-nunito-sans);
+font-style: var(--unnamed-font-style-normal);
+font-weight: var(--unnamed-font-weight-800);
+font-size: var(--unnamed-font-size-20);
+line-height: var(--unnamed-line-spacing-27);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+}
+.unnamed-character-style-3 {
+font-family: var(--unnamed-font-family-nunito-sans);
+font-style: var(--unnamed-font-style-normal);
+font-weight: var(--unnamed-font-weight-800);
+font-size: var(--unnamed-font-size-25);
+line-height: var(--unnamed-line-spacing-34);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+}
+.unnamed-character-style-4 {
+font-family: var(--unnamed-font-family-nunito-sans);
+font-style: var(--unnamed-font-style-normal);
+font-weight: var(--unnamed-font-weight-bold);
+font-size: var(--unnamed-font-size-30);
+line-height: var(--unnamed-line-spacing-40);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+}
