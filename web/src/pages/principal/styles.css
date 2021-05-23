@@ -8,8 +8,7 @@
 } */
 
 .container {
-	background: whitesmoke;
-	
+	background: whitesmoke;	
 	width: 754px;
 }
 
@@ -22,13 +21,25 @@
 	overflow: visible;
 } */
 
-.logo-container img {
+.container-text {
+	width: 66%;
+	text-align: right;
+	/* background: blue; */
+}
+
+.container-logo img {
+	/* width: 35%; */
   height: 10rem;
 } 
 
 .logo-container {
   text-align: left;
   margin-bottom: 3.2rem;
+}
+
+.container, .container-logo, .container-text {
+	display: inline-block;
+	vertical-align: bottom;
 }
 
 /* #nome_usuario {

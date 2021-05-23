@@ -7,26 +7,26 @@ function Principal() {
   return (
     <div id="page-principal">
 
-
       <div id="page-principal-content" className="container">
         <nav >
 
-          <div className="logo-container">
+          <div className="container-logo">
             <img src={logoImg} alt="Resp"/>
           </div>
 
-          <div id="usuario">
-            <span>Usuário</span>
-          </div>
+          <div className="container-text">
+            <div id="usuario">
+              <span>Usuário</span>
+            </div>
 
-          <div id="nome_usuario">
-            <span>Nome do Usuário Logado</span>
+            <div id="nome_usuario">
+              <span>Nome do Usuário Logado</span>
+            </div>
+            
+            {/* <div id="Sair">
+              <a href="url">Sair</a>
+            </div> */}
           </div>
-          
-          <div id="Sair">
-            <a href="url">Sair</a>
-          </div>
-
         </nav>
       </div>
 
