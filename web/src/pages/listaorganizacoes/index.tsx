@@ -5,11 +5,10 @@ import ReactDOM from 'react-dom';
 import Principal from '../principal';
 import btnVoltar from '../../assets/images/voltar_blue.png';
 
-import './styles.css';
+//import './styles.css';
 
 import search from '../../assets/images/search.png';
-import logoImg from '../../assets/images/mao.png';
-import logoOrg5 from '../../assets/images/lixo/logo2.jpg';
+import OrganizacaoItem from '../../componentes/OrganizacaoItem';
 
 function ListaOrganizacoes() {
 
@@ -33,19 +32,12 @@ function ListaOrganizacoes() {
             </div>
 
             <main>
-              <article className="organizacao-item">
-                <header>
-                  <img src={logoOrg5} alt="logo"/>
-                  <div>
-                    <strong>Mara Studio</strong>
-                    <span>Endereço da organização ou empresa</span>
-                  </div>
-                </header>
-
-                <footer>
-
-                </footer>
-              </article>
+              <OrganizacaoItem />
+              <OrganizacaoItem />
+              <OrganizacaoItem />
+              <OrganizacaoItem />              
+              <OrganizacaoItem />              
+              <OrganizacaoItem />              
             </main>
 
           </div>
