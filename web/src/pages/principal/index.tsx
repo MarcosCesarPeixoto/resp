@@ -8,8 +8,7 @@ function Principal() {
     <div id="page-principal">
 
       <div id="page-principal-content" className="container">
-        <nav >
-
+        <nav>
           <div className="container-logo">
             <img src={logoImg} alt="Resp"/>
           </div>
@@ -23,13 +22,13 @@ function Principal() {
               <span>Nome do Usuário Logado</span>
             </div>
             
-            {/* <div id="Sair">
+            <div id="Sair" className="button-sair">
+              <br></br><br></br>
               <a href="url">Sair</a>
-            </div> */}
+            </div>
           </div>
         </nav>
       </div>
-
 
       <nav id="menu-h">
         <ul>
@@ -40,8 +39,6 @@ function Principal() {
             <li><a href="url">Entrar</a></li>
         </ul>
       </nav>
-
-
 
     </div>
 

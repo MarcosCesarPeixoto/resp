@@ -100,3 +100,30 @@
       font-size: 62.5%
     }
   } 
+
+  #divBusca{    
+    margin-top: 15px;
+    padding-top: 8px;
+    background-color:var(--color-cinza-claro);
+    border:solid 1px;
+    border-radius: 15px;
+    width:450px;
+  }
+
+  #txtBusca{
+    outline: 0;
+    float:left;
+    background-color:transparent;
+    padding-left:30px;
+    font-style:italic;
+    font-size:18px;
+    border:none;
+    height:18px;
+    width:420px;
+  }
+
+  /* .pesquisa-container {
+    display: inline-block;
+    vertical-align: bottom;
+  } */
+  
