@@ -1,0 +1,125 @@
+
+.container {
+	height: 100%;
+	background: whitesmoke;	
+	display: grid;
+	width: 754px;
+	/* grid-template-columns: auto 1fr; */
+	grid-template-columns: 1fr;	
+	grid-template-rows: auto;
+}
+
+.container-cabecalho {	
+	display: grid;
+	grid-template-columns: auto 1fr;
+	width: 95%;
+	align-items: center;
+}
+
+.container-cabecalho img{
+	height: 7em;	
+}
+
+.container-text {
+	width: 100%;
+	text-align: end;
+}
+
+.container, .container-logo, .container-text {
+	vertical-align: bottom;
+}
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#menu-h{	
+	background-color: rgba(4,84,110,1);	
+	width: 754px;
+}
+
+#menu-h ul {
+	max-width: 754px;
+	list-style: none;
+	padding: 0;
+}
+
+#menu-h ul li {
+	display: inline;	
+}
+
+#menu-h ul li a {
+	color: #FFF;
+	padding: 20px;
+	display: inline-block;	
+	text-decoration: none;
+	transition: background .4s;		
+}
+
+#menu-h ul li a:hover {
+	background-color: rgba(2,61,80,1);
+}
+
+#menu-h ul li:last-child a {
+	float: right;
+	background-color: rgb(24, 139, 233);
+}
+
+/* --------------------------------------------responsividade---------------------------------------------- */
+
+@media (max-width: 755px){
+  #menu-h ul li a {		
+		display: flex;
+		font-size: 140%;
+		justify-content: center;  
+	}
+
+	#menu-h ul li:last-child a {
+		display: flex;
+		width: 100%;
+		/* float: left; */
+		/* background-color: rgb(24, 139, 233); */
+	}	
+}
+
+/* ---------------//-------------- */
+
+@media (max-width: 600px) {
+
+	.container {
+		display: flex;
+		/* grid-template-columns: 1fr;		 */
+	}
+
+	.container-cabecalho {			
+		grid-template-columns: 1fr;
+		text-align: center;
+		font-size: 120%;
+	}
+
+	.container-text {
+		text-align: center;
+	}
+
+  #menu-h ul li a {		
+		display: flex;
+		font-size: 140%;
+		justify-content: center; 
+	}
+
+	#menu-h ul li:last-child a {
+		display: flex;
+		width: 100%;
+	}
+}
+
+/* ---------------//-------------- */
+
+@media (max-width: 270px) {
+	.container-cabecalho img{
+		height: 4rem;	
+	}
+}
