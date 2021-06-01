@@ -1,5 +1,6 @@
 import React from 'react';
 import logoImg from '../../assets/images/resp_logo.png';
+
 import './styles.css';
 
 function Cabecalho() {
