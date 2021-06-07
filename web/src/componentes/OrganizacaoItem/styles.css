@@ -1,5 +1,4 @@
-.organizacao-item {
-  /* padding: 0.1rem 0.1rem; */
+.organizacao-item {  
   background: var(--color-cinza-maisclaro);
   border: 1px solid var(--color-cinza);  
   border-radius: 3rem;

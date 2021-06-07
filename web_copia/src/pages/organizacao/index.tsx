@@ -1,12 +1,15 @@
 import React from 'react';
 import Cabecalho from '../../componentes/Cabecalho';
 
-function Principal() {
+function Organizacao () {
+
   return (
-    
+    <div>
       <Cabecalho />
 
-  );
-}
+    </div> 
+  )
 
-export default Principal;
+};
+
+export default Organizacao;

@@ -26,7 +26,9 @@ export default class UserController{
       return res.status(201).send();
 
     } catch(err) {
-      
+
+      // console.log(err); 
+
       await trx.rollback();
       return res.status(400).json({
         error: 'Erro inexperado ao inserir novo usuário: ' + err

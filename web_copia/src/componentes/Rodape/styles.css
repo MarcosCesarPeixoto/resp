@@ -1,0 +1,21 @@
+.footer {
+  background: #04546E;
+  height: 5rem;
+  /* padding: 0.5rem; */
+  display: grid;
+  /* display: inline-block;   */
+  grid-auto-flow: column;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+.footer img {  
+  width: 5rem;
+  height: 5rem;
+}
+
+.footer div {
+  font-size: small;
+  color: #FFFFFF;    
+}
+

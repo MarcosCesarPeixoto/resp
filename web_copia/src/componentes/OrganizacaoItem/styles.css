@@ -2,7 +2,7 @@
 .organizacao-item {
   background: var(--color-background);
   border: 1px solid var(--color-cinza);
-  /* border-radius: 2.5rem; */
+  border-radius: 2.5rem;
   margin-top: 1rem;
 }
 

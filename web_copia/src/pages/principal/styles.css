@@ -1,0 +1,199 @@
+/* #page-principal {
+  width: 100vw;
+  height: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.container {
+	background: whitesmoke;	
+	width: 754px;
+}
+
+/* #logo-container {
+	position: absolute;
+	width: 334px;
+	height: 120px;
+	left: 16px;
+	top: 15px;
+	overflow: visible;
+} */
+
+.container-logo img {
+	/* width: 35%; */
+  height: 10rem;
+} 
+
+.container-text {
+	width: 66%;
+	text-align: right;
+	/* background: blue; */
+}
+
+/* .logo-container {
+  text-align: left;
+  margin-bottom: 3.2rem;
+} */
+
+.container, .container-logo, .container-text {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+/* #nome_usuario {
+	left: 583px;
+	top: 47px;
+	position: absolute;
+	overflow: visible;
+	width: 164px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Nunito Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	color: rgba(245,228,228,1);
+} */
+
+.links {
+  /* font: var(--font-weight-bold); */
+	/* font: var(--color-cinza-claro); */
+}
+
+/* .botao-sair {
+  font-weight: bold;	
+  text-decoration: none;
+} */
+
+/* .Sair { */
+	/* left: 706px;  */
+	/* top: 88px; */
+	/* position: absolute; */
+	/* overflow: visible; */
+	/* width: 38px; */
+	/* white-space: nowrap; */
+	/* text-align: left; */
+	/* font-family: Nunito Sans; */
+	/* font-style: normal; */
+	/* font-weight: bold; */
+	/* font-size: 20px; */
+	/* color: rgba(245,228,228,1); */
+	/* text-decoration: underline;
+/* } */
+
+
+/* #Resp_Logo_Transparente {
+	position: absolute;
+	width: 334px;
+	height: 120px;
+	left: 16px;
+	top: 15px;
+	overflow: visible;
+} */
+
+
+/* Menu Rodape  */
+
+#Retngulo_-_Rodape {
+	fill: rgba(4,84,110,1);
+	stroke: rgba(112,112,112,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Retngulo_-_Rodape {
+	filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
+	position: absolute;
+	overflow: visible;
+	width: 754px;
+	height: 58px;
+	left: 16px;
+	top: 986px;
+}
+
+#Retngulo_-_Foco_Menu {
+	fill: rgba(2,61,80,1);
+}
+.Retngulo_-_Foco_Menu {
+	position: absolute;
+	overflow: visible;
+	width: 244px;
+	height: 38px;
+	left: 16px;
+	top: 986px;
+}
+
+.menu-rodape {
+	/* filter: drop-shadow(3px 6px 9px rgba(0, 0, 0, 0.161)); */	
+	top: 990px;
+	position: absolute;
+	overflow: visible;
+	width: 244px;
+	white-space: nowrap;
+	text-align: left;
+	
+	font-family: Nunito Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 25px;
+
+	color: rgba(255,255,255,1);
+	text-decoration: none;
+}
+
+#menu-agendamentos {
+	/* filter: drop-shadow(3px 6px 9px rgba(0, 0, 0, 0.161)); */
+	left: 32px;
+}
+#menu-cadastro {
+	left: 580px;
+}
+#menu-principal {
+	left: 334px;
+}
+
+
+/* teste do menu */
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#menu-h{	
+	background-color: rgba(4,84,110,1);	
+}
+
+#menu-h ul {
+	max-width: 800px;
+	list-style: none;
+	padding: 0;
+}
+
+#menu-h ul li {
+	display: inline;
+}
+
+#menu-h ul li a {
+	color: #FFF;
+	padding: 20px;
+	display: inline-block;
+	text-decoration: none;
+	transition: background .4s;
+}
+
+#menu-h ul li a:hover {
+	/* background-color: rgb(24, 139, 233); */
+	background-color: rgba(2,61,80,1);
+}
+
+#menu-h ul li:last-child a {
+	float: right;
+	background-color: rgb(24, 139, 233);
+}

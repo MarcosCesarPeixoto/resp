@@ -1,6 +1,4 @@
 .container {
-  padding: 0.5rem;
-  /* width: 754px; */
   height: 100%;
   display: grid;
   grid-template-columns: 200px;
@@ -11,11 +9,6 @@
     'header'
     'main'
     'footer';
-}
-
-.container-logo img {
-  width: 200px;
-  height: 100px;
 }
 
 header {

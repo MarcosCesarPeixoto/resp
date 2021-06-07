@@ -2,47 +2,38 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 
-import Principal from '../principal';
-import btnVoltar from '../../assets/images/voltar_blue.png';
-
-//import './styles.css';
-
-import search from '../../assets/images/search.png';
+import Cabecalho from '../../componentes/Cabecalho';
 import OrganizacaoItem from '../../componentes/OrganizacaoItem';
+
+import '../../assets/styles/global.css';
+import './styles.css';
+
+// ----- imagens -----
+import search from '../../assets/images/search.png';
+import btnVoltar from '../../assets/images/voltar_blue.png';
+import Rodape from '../../componentes/Rodape';
 
 function ListaOrganizacoes() {
 
   return (
+
     <div>
-      <Principal />
-      <div id="page-lista-organizacoes" className="container">
-        <header className="page-header">
-    
-          <div className="pesquisa-container">
+      <Cabecalho />
 
-            {/* <div className="botoes-topo-container">
-              <Link to="/">
-                <img src={btnVoltar} alt="Voltar" />
-              </Link>
-            </div> */}
-
-            <div id="divBusca">
-              <input type="text" id="txtBusca" placeholder="Informe a empresa ou atendimento desejado..."/>
-              <img src={search} id="btnBusca" alt="Buscar"/>
+      <div id="page-lista-organizacoes" className="container-lista-organizacao">
+          <div className="container-pesquisa-organizacao">            
+            <div >
+              <input type="text" id="txtBusca" className="txtBusca-organizacao" placeholder="Informe a empresa ou atendimento desejado..."/>
             </div>
-
-            <main>
-              <OrganizacaoItem />
-              <OrganizacaoItem />
-              <OrganizacaoItem />
-              <OrganizacaoItem />              
-              <OrganizacaoItem />              
-              <OrganizacaoItem />              
-            </main>
-
+            <img src={search} id="btnBusca" className="btnBusca" alt="Buscar"/>
           </div>
 
-        </header>
+        <main>
+          <OrganizacaoItem />
+          <OrganizacaoItem />
+          {/* <OrganizacaoItem />
+          <OrganizacaoItem /> */}
+        </main>
       </div>
     </div>
   )
