@@ -20,6 +20,22 @@
   box-shadow: 0em 0.1em 0.4em var(--color-cinza);
 }
 
+.container-pesquisa-organizacao button {
+  width: 20%;
+  height: 32px;
+  background: var(--color-cinza);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;  
+  align-items: center;
+  transition: red 0.2s;
+  border: 0;
+  font-size: medium;
+  padding: 1rem;
+  float:right;
+  visibility: hidden;
+}
+
 .container-pesquisa-organizacao img {
   padding: 0.5rem 1rem;
 }

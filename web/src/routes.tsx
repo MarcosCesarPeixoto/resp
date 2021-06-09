@@ -4,7 +4,7 @@ import Principal from './pages/principal';
 import Organizacao from './pages/organizacao'
 import CadastroUsuario from './pages/cadastroUsuario'
 
-import ListaOrganizacoes from './pages/listaorganizacoes'
+import ListaOrganizacoes from './pages/listaorganizacoes/index'
 import ListaAtendimentos from './pages/listaatendimentos';
 
 function Routes() {
