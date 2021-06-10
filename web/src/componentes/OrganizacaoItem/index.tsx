@@ -25,19 +25,31 @@ interface OrganizacaoItemProps {
 }
 
 const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {
+
+  function ExibirImagem(props: any) {
+    const possuiLogo = props.possuiLogo;
+    if(possuiLogo) {
+      return <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>
+    } 
+  }
+
+  function atendimentosOrganizacao() {
+  
+    window.location.href = '../../cabecalhon.js';
+    
+  }
+
   return (
-    <article className="organizacao-item">
+    <article className="organizacao-item" onSubmit={atendimentosOrganizacao}>
       <header>
         <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>
+        {/* <ExibirImagem possuiLogo={organizacao.logomarca_org} /> */}
         <div>
           <strong>{organizacao.razaosocial_org}</strong>
           <span>
-            {organizacao.endereco_org} 
-            {organizacao.numero_org}
-            {organizacao.complemento_org}
-            - Bairro {organizacao.bairro_org}
-            - {organizacao.descricao_cidade_org}
-            / {organizacao.uf_org}
+            {organizacao.endereco_org}, {organizacao.numero_org} {organizacao.complemento_org} - {organizacao.bairro_org} <br></br>
+            {organizacao.descricao_cidade_org}-{organizacao.uf_org} {organizacao.cep_org} <br></br>
+            {organizacao.telefone_org} - {organizacao.celular_org}
           </span>
         </div>
       </header>

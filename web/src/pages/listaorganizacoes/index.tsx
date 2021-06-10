@@ -25,7 +25,15 @@ function ListaOrganizacoes ()  {
   async function buscaOrganizacoes(e: FormEvent) {
     e.preventDefault(); // evita recarregamento da página
 
-    const response = await api.get('organizacoes', {
+    // Monta o link do que deve ser buscado
+    let conteudoDeBusca = '';
+    if(subject){
+      conteudoDeBusca = 'organizacoes?conteudo_busca=' + subject;
+    } else {
+      conteudoDeBusca = 'organizacoes';
+    }
+
+    const response = await api.get(conteudoDeBusca , {
       params: {
         subject
       }
@@ -33,6 +41,7 @@ function ListaOrganizacoes ()  {
 
     // console.log(response.data);
     setOrganizacoes(response.data); // obtendo a lista de organizações retornada
+    
   }
   
   return (
@@ -59,7 +68,6 @@ function ListaOrganizacoes ()  {
 
         <main>
           {organizacoes.map((organizacao: Organizacao) => {
-            // return <OrganizacaoItem organizacao={organizacao} />;
             return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao} />;
           })}
           {/* <OrganizacaoItem />
