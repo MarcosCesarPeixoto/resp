@@ -68,7 +68,7 @@ function ListaOrganizacoes ()  {
 
         <main>
           {organizacoes.map((organizacao: Organizacao) => {
-            return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao} />;
+            return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao}  />;
           })}
           {/* <OrganizacaoItem />
           <OrganizacaoItem />

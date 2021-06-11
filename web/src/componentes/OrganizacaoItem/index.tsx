@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
 
 import './styles.css';
 
@@ -24,26 +24,17 @@ interface OrganizacaoItemProps {
   organizacao: Organizacao;
 }
 
+
 const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {
 
-  function ExibirImagem(props: any) {
-    const possuiLogo = props.possuiLogo;
-    if(possuiLogo) {
-      return <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>
-    } 
-  }
-
-  function atendimentosOrganizacao() {
-  
-    window.location.href = '../../cabecalhon.js';
-    
-  }
+  let ExibirLogoOrganizacao = (organizacao.logomarca_org);
 
   return (
-    <article className="organizacao-item" onSubmit={atendimentosOrganizacao}>
+    // <article className="organizacao-item" onSubmit={atendimentosOrganizacao}>
+    <article className="organizacao-item">
       <header>
-        <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>
-        {/* <ExibirImagem possuiLogo={organizacao.logomarca_org} /> */}
+        {ExibirLogoOrganizacao && <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>}
+        {/* <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/> */}
         <div>
           <strong>{organizacao.razaosocial_org}</strong>
           <span>

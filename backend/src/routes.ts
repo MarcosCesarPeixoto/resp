@@ -16,8 +16,19 @@ const userController = new UserController();
 const favoritosController = new FavoritosController();
 const agendamentosController = new AgendamentosController();
 
+var path = require('path');
+
 routes.get('/', (req, res) => {
   return res.json({message: 'Rota Principal'});  
+});
+
+// ********* Recursos ************
+routes.get('/public/imagens', (req, res)  => {
+  res.sendFile(path.join(__dirname + '/public/imagens'));
+});
+
+routes.get('/web/src/assets/images/lixo', (req, res) => {
+  res.sendFile(path.join(__dirname + '/web/src/assets/images/lixo'));
 });
 
 routes.get('/organizacoes', organizacoesController.index);
