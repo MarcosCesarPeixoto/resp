@@ -5,6 +5,7 @@
   margin-top: 1rem;
   width:600px;
   box-shadow: 0em 0.1em 0.4em var(--color-cinza);  
+  cursor: pointer;
 }
 
 .organizacao-item header {

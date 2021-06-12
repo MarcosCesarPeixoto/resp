@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './styles.css';
 
@@ -24,17 +25,21 @@ interface OrganizacaoItemProps {
   organizacao: Organizacao;
 }
 
-
 const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {
-
+  
   let ExibirLogoOrganizacao = (organizacao.logomarca_org);
 
+  const history = useHistory();
+
+  const redirectListaAtendimentos = () => {    
+    history.push('/listaatendimentos');
+  }
+
   return (
-    // <article className="organizacao-item" onSubmit={atendimentosOrganizacao}>
-    <article className="organizacao-item">
-      <header>
+    <div className="organizacao-item" onClick={redirectListaAtendimentos}>
+      <header>      
         {ExibirLogoOrganizacao && <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>}
-        {/* <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/> */}
+
         <div>
           <strong>{organizacao.razaosocial_org}</strong>
           <span>
@@ -44,7 +49,7 @@ const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {
           </span>
         </div>
       </header>
-    </article>
+    </div>
   );
 }
 
