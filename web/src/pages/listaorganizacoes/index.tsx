@@ -49,7 +49,7 @@ function ListaOrganizacoes ()  {
       <Cabecalho />
 
       <div id="page-lista-organizacoes" className="container-lista-organizacao">
-          <div className="container-pesquisa-organizacao">            
+          <div className="container-pesquisa-organizacao"> 
             <form id="busca-organizacoes" onSubmit={buscaOrganizacoes}>
               <input 
                 type="text" 
@@ -70,9 +70,6 @@ function ListaOrganizacoes ()  {
           {organizacoes.map((organizacao: Organizacao) => {
             return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao}  />;
           })}
-          {/* <OrganizacaoItem />
-          <OrganizacaoItem />
-          <OrganizacaoItem /> */}
         </main>
       </div>
     </div>
@@ -80,3 +77,6 @@ function ListaOrganizacoes ()  {
 }
 
 export default ListaOrganizacoes;
+
+
+// const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {

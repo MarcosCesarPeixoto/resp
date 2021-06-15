@@ -4,7 +4,6 @@
   --color-background: #F0F0F7;  
   --color-preto: #000000;
   --color-azul: #04546E;
-  /* --color-cinza: #707070; */
   --color-cinza: #8d8d8d;
   --color-cinza-claro: #C7B7B7;
   --color-cinza-maisclaro: #dad6d6;
@@ -35,7 +34,8 @@
 
 body {
   /* background: var(--color-background); */
-  background: blue;
+  /* background: blue; */
+  background: whitesmoke;
 }
 
 

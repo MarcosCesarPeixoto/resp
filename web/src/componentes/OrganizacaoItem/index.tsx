@@ -32,7 +32,7 @@ const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {
   const history = useHistory();
 
   const redirectListaAtendimentos = () => {    
-    history.push('/listaatendimentos');
+    history.push('/listaatendimentos?id_org=' + organizacao.id_org);
   }
 
   return (
