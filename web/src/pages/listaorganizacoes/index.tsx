@@ -1,6 +1,4 @@
 import React, { FormEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
-import ReactDOM from 'react-dom';
 
 import api from '../../services/api';
 
@@ -12,8 +10,8 @@ import './styles.css';
 
 // ----- imagens -----
 import search from '../../assets/images/search.png';
-import btnVoltar from '../../assets/images/voltar_blue.png';
-import Rodape from '../../componentes/Rodape';
+// import btnVoltar from '../../assets/images/voltar_blue.png';
+// import Rodape from '../../componentes/Rodape';
 
 
 function ListaOrganizacoes ()  { 
@@ -38,10 +36,8 @@ function ListaOrganizacoes ()  {
         subject
       }
     });
-
     // console.log(response.data);
-    setOrganizacoes(response.data); // obtendo a lista de organizações retornada
-    
+    setOrganizacoes(response.data); // obtendo a lista de organizações retornada    
   }
   
   return (
@@ -59,13 +55,10 @@ function ListaOrganizacoes ()  {
                 value={subject} 
                 onChange={e => { setSubject(e.target.value) }} 
               />
-
-              <button type="submit">Pesquisar</button> 
-
-            </form>
-            <img src={search} id="btnBusca" className="btnBusca" alt="Buscar"/>
+              <img src={search} id="btnBusca" className="btnBusca" alt="Buscar"/>
+              <button type="submit">Pesquisar</button>               
+            </form>            
           </div>
-
         <main>
           {organizacoes.map((organizacao: Organizacao) => {
             return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao}  />;
@@ -77,6 +70,3 @@ function ListaOrganizacoes ()  {
 }
 
 export default ListaOrganizacoes;
-
-
-// const OrganizacaoItem: React.FC<OrganizacaoItemProps> = ({ organizacao }) => {

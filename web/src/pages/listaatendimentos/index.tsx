@@ -1,48 +1,58 @@
-import React from 'react'
-import Principal from '../principal';
+import React  from 'react';
+import { useLocation } from "react-router-dom";
+
+import Cabecalho from '../../componentes/Cabecalho';
 import Destaque from '../../componentes/Destaque';
-import OrganizacaoItem from '../../componentes/OrganizacaoItem';
+import OrganizacaoDados from '../../componentes/OrganizacaoDados';
 
-import '../../assets/styles/global.css'
-
-const organizacao = {
-  
-    "id_org": 1,
-    "razaosocial_org": "Bela Fashion",
-    "atividade_org": 1,
-    "endereco_org": "Rua São José",
-    "complemento_org": "Loja 1",
-    "numero_org": "100",
-    "bairro_org": "Centro",
-    "cep_org": "36502-000",
-    "cidade_org": 1,
-    "descricao_cidade_org": "Ubá",
-    "uf_org": "MG",
-    "fisico_juridico_org": 0,
-    "cpf_cnpj_org": "25722123000100",
-    "telefone_org": "(32) 1234-5378",
-    "celular_org": "(32) 1234-5378",
-    "logomarca_org": "../../assets/images/lixo/logo2.jpg",
-    "dh_criacao_org": null,
-    "dh_atualizacao_org": null
-  
+export interface Organizacao {
+  id_org: number;
+  razaosocial_org: string;
+  endereco_org: string;
+  complemento_org: string;
+  numero_org: string;
+  bairro_org: string;
+  cep_org: string;
+  cidade_org: number;
+  descricao_cidade_org: string;
+  uf_org: string;
+  telefone_org: string;
+  celular_org: string;
+  logomarca_org: string;
 }
 
-function ListaAtendimentos() {
+// const ListaAtendimentos: React.FC = (props) => {
+//   const titulo = "Selecione o atendimento desejado"; 
+  
+//   const  [textRazaoSocial, setTextRazaoSocial] = useState("");
 
-  // console.log(response.data);
+//   useEffect(() => {
+//     setTextRazaoSocial(props.location.state.razao_social);
+//   }, []);  
 
-  const titulo = "Selecione o atendimento desejado";
+//   console.log(textRazaoSocial);
+    
+//   return (
+//     <div>      
+//       <Cabecalho />
+//       {/* <OrganizacaoDados organizacao={ state } />  */}
+//       <Destaque titulo={titulo} /> 
+//     </div>
+//   );
+// }
+// **************************************************
+
+const ListaAtendimentos: React.FC = () => {
+  const titulo = "Selecione o atendimento desejado"; 
+  const { state }  = useLocation<Organizacao>();
 
   return (
-    <div>
-      <Principal />      
-      <OrganizacaoItem key={1} organizacao={organizacao} />;
-      <Destaque titulo={titulo} />
-      
-      <h1>Lista de Atendimentos da Organização</h1>
+    <div>      
+      <Cabecalho />
+      <OrganizacaoDados organizacao={ state } /> 
+      <Destaque titulo={titulo} /> 
     </div>
-  )
+  );
 }
 
 export default ListaAtendimentos;

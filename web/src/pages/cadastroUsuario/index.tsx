@@ -1,5 +1,5 @@
 
-import { Button, createMuiTheme, Input, TextField, ThemeProvider } from '@material-ui/core';
+import { Button, createMuiTheme, TextField, ThemeProvider } from '@material-ui/core';
 import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -44,8 +44,7 @@ function CadastroUsuario () {
     }).then(() => {
       alert('Cadastro de Usuário realizado com sucesso!');
       history.push('/listaorganizacoes');
-    }).catch((error) => {
-      // alert('Erro no cadastro de usuário: ' + error);
+    }).catch((error) => { 
       if (error.response){
         alert('Erro no cadastro de usuário: ResponseError = ' + error.response);
       } else if(error.request){
