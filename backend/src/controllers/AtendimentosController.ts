@@ -19,6 +19,8 @@ export default class AtendimentosController {
       horario_padrao_inicio_atd,
       horario_padrao_fim_atd,
       organizacao_atd,
+      ativo_atd,
+      imagem_atd,
       dh_criacao_atd,
       dh_atualizacao_atd
     } = req.body;
@@ -56,11 +58,11 @@ export default class AtendimentosController {
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id_atd } = req.query;
-      const { organizacao_atd } = req.query;
-
+      // const { id_atd } = req.query;
+      var id_atd = req.query.id_atd;
+      var organizacao_atd = req.query.organizacao_atd;
+      
       const query = db('atendimento');
-
       if (id_atd) {
         query.where({ id_atd });
       } else if (organizacao_atd) {

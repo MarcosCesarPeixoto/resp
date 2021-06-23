@@ -1,9 +1,12 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { useLocation } from "react-router-dom";
+
+import api from '../../services/api';
 
 import Cabecalho from '../../componentes/Cabecalho';
 import Destaque from '../../componentes/Destaque';
 import OrganizacaoDados from '../../componentes/OrganizacaoDados';
+import AtendimentoItem, { Atendimento } from '../../componentes/AtendimentoItem';
 
 export interface Organizacao {
   id_org: number;
@@ -21,36 +24,38 @@ export interface Organizacao {
   logomarca_org: string;
 }
 
-// const ListaAtendimentos: React.FC = (props) => {
-//   const titulo = "Selecione o atendimento desejado"; 
-  
-//   const  [textRazaoSocial, setTextRazaoSocial] = useState("");
-
-//   useEffect(() => {
-//     setTextRazaoSocial(props.location.state.razao_social);
-//   }, []);  
-
-//   console.log(textRazaoSocial);
-    
-//   return (
-//     <div>      
-//       <Cabecalho />
-//       {/* <OrganizacaoDados organizacao={ state } />  */}
-//       <Destaque titulo={titulo} /> 
-//     </div>
-//   );
-// }
-// **************************************************
-
 const ListaAtendimentos: React.FC = () => {
   const titulo = "Selecione o atendimento desejado"; 
   const { state }  = useLocation<Organizacao>();
+  const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia 
+
+  let carregouDados = false;
+
+  async function buscaAtendimentos() {
+    const response = await api.get('atendimentos' , {
+      params: {
+        organizacao_atd: state.id_org
+      }
+    });
+    setAtendimentos(response.data);
+  }
+
+  useEffect(() => {
+      buscaAtendimentos();
+  }, []);
 
   return (
     <div>      
       <Cabecalho />
       <OrganizacaoDados organizacao={ state } /> 
       <Destaque titulo={titulo} /> 
+      <form id="lista-atendimentos" >
+        <main>        
+          {atendimentos.map((atendimento: Atendimento) => {
+            return <AtendimentoItem key={atendimento.id_atd} atendimento={atendimento}  />;
+          })}
+        </main>
+      </form>
     </div>
   );
 }
