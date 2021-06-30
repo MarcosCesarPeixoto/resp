@@ -56,6 +56,8 @@ export default class AgendamentosController {
     try {
       const { id_agend } = req.query;
       const { usuario_agend } = req.query;      
+      const { data_agend } = req.query;      
+      const { organizacao_agend } = req.query;   
       // const { organizacao_agend } = req.query;
       // const { atendimento_agend } = req.query;
       // const { colaborador_agend } = req.query;
@@ -66,6 +68,14 @@ export default class AgendamentosController {
         query.where({ id_agend });
       } else if (usuario_agend) {
         query.where({ usuario_agend });
+      } else if (data_agend) {
+        if (data_agend && organizacao_agend) {
+          console.log(organizacao_agend + " - " + data_agend);
+          // query.whereRaw("(organizacao_agend=" + organizacao_agend +") and (data_agend = " + data_agend + ")");
+          query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
+        } else if (data_agend) {
+          query.where({ data_agend });
+        }
       }
 
       const results = await query;

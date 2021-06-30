@@ -5,6 +5,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Atendimento } from '../../componentes/AtendimentoItem';  // para importar a "inteface Atendimento"
 
 import Cabecalho from '../../componentes/Cabecalho';
+import Horarios from '../../componentes/Horarios';
 
 import api from '../../services/api';
 
@@ -33,15 +34,17 @@ interface AtendimentoItemProps {
   atendimento: Atendimento;
 }
 
-
 const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
 
-  // const { state }  = useLocation<Atendimento>();
+  //console.log(atendimento.id_atd);
+  //console.log(atendimento.descricao_atd);
+
+  const { state }  = useLocation<Atendimento>();
   // const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia    
   // const history = useHistory();
   
   // const [usuario_agend, setUsuarioAgend] = useState('');
-  // const [organizacao_agend, setOrganizacaoAgend] = useState('');
+  const [organizacao_agend, setOrganizacaoAgend] = useState('');
   // const [atendimento_agend, setAtendimentoAgend] = useState('');
   // const [colaborador_agend, setColaboradorAgend] = useState('');
   const [data_agend, setDataAgend] = useState('');
@@ -49,6 +52,24 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   // const [status_agend, setStatusAgend] = useState('');
   // const [observacao_agend, setObservacaoAgend] = useState('');
   // const [agend_anterior_agend, setAgendAnteriorAgend] = useState('');
+
+  const [agendamentosNaData, setAgendamentosNaData] = useState([]); // Criando uma lista vazia de agendamentos
+
+  function buscarHorarios() {
+    console.log('clicou no botão buscar: ' + data_agend);
+    buscarAgendamentosNaData( );
+    console.log(agendamentosNaData);
+  }
+
+  async function buscarAgendamentosNaData() {
+    const response = await api.get('agendamentos' , {
+      params: {        
+        data_agend: data_agend,
+        organizacao_agend: state.organizacao_atd,
+      }
+    });
+    setAgendamentosNaData(response.data);
+  }
 
   function handleIncluirAgendamento(e: FormEvent ) {
     e.preventDefault(); 
@@ -83,10 +104,16 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     });
   }
 
+  // function handleChange(e: Event) {
+  //   setDataAgend(e.target.value);
+  //   console.log('change');
+  // }cd
+
   return (
     <div id="cadastro-agendamento" className="container-cadastroagendamento">
       <Cabecalho />
-      {/* {state.descricao_atd}  */}
+      {state.descricao_atd} 
+      {state.id_atd}
 
       <main className="container-cadastroagendamento">
         <form onSubmit={handleIncluirAgendamento}>
@@ -106,8 +133,24 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                   shrink: true,
                 }}
                 onChange={(e) => { setDataAgend(e.target.value) }}
+                // onChange={handleChange}
               /> 
+              {/* <Button type="button" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" > */}
             </div>  
+
+            <div className="input-block">
+              <Button 
+                type="button" 
+                variant="contained" 
+                color="primary"
+                style={{ borderRadius: 50 }} 
+                className="botao" 
+                onClick={buscarHorarios}>
+                Horários
+              </Button> 
+            </div> 
+
+            <Horarios />
 
             <div className="input-block">
               <TextField

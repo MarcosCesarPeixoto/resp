@@ -1,0 +1,24 @@
+.horario-container {  
+  padding: 10px;
+  /* background: var(--color-cinza-maisclaro); */
+  background: var(--color-background);
+  border: 1px solid var(--color-cinza);  
+  border-radius: 1rem;
+  margin-top: 1rem;
+  width:150px;
+  box-shadow: 0em 0.1em 0.4em var(--color-cinza);    
+}
+
+.horario-item {  
+  /* background: var(--color-cinza-maisclaro); */
+  background: var(--color-azul);
+  border: 1px solid var(--color-cinza);  
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+  width:80px;
+  box-shadow: 0em 0.1em 0.4em var(--color-cinza);  
+  align-items: center;
+  text-align: center;
+  color: --color-background;
+  cursor: pointer;  
+}
