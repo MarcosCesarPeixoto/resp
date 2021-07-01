@@ -150,6 +150,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
               </Button> 
             </div> 
 
+            {/* <Horarios hora="08:00" disponivel=false /> */}
             <Horarios />
 
             <div className="input-block">

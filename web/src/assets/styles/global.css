@@ -7,7 +7,17 @@
   --color-cinza: #8d8d8d;
   --color-cinza-claro: #C7B7B7;
   --color-cinza-maisclaro: #dad6d6;
+
+  --primary-light: #757ce8;
+  --primary-main: #228B22;
+  --primary-dark: #006400;
+  --primary-contrastText: #fff;
   
+  --secondary-light: #ff7961;
+  --secondary-main: #f44336;
+  --secondary-dark: #ba000d;
+  --secondary-contrastText: #000;
+
   /* Font/text values */
   --font-nunito-sans: Nunito Sans;
   --font-syle-normal: normal;

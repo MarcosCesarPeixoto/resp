@@ -11,14 +11,21 @@
 
 .horario-item {  
   /* background: var(--color-cinza-maisclaro); */
-  background: var(--color-azul);
+  /* background: var(--color-azul); */
+  background: var(--primary-main);
   border: 1px solid var(--color-cinza);  
-  border-radius: 0.25rem;
+  /* border-radius: 0.25rem; */
+  border-radius: 10px;
   margin-top: 0.25rem;
   width:80px;
   box-shadow: 0em 0.1em 0.4em var(--color-cinza);  
   align-items: center;
   text-align: center;
-  color: --color-background;
+  /* color: --color-background; */
+  color:"#FFFFFF";  
   cursor: pointer;  
 }
+
+.horario-item :hover {
+  background: var(--primary-dark);  
+}  
