@@ -30,11 +30,25 @@ const theme = createMuiTheme({
   },
 });
 
+export interface Horario {
+  hora: string;
+  disponivel: string;
+}
+
 interface AtendimentoItemProps {
   atendimento: Atendimento;
 }
 
 const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
+
+  const horarios = [
+    { hora: '08:00', disponivel: "N"},
+    { hora: '08:30', disponivel: "S"},
+    { hora: '09:00', disponivel: "S"},
+    { hora: '09:30', disponivel: "S"},
+    { hora: '10:00', disponivel: "N"},
+    { hora: '10:30', disponivel: "S"}
+  ]  
 
   //console.log(atendimento.id_atd);
   //console.log(atendimento.descricao_atd);
@@ -109,6 +123,8 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   //   console.log('change');
   // }cd
 
+  let horario: Horario;
+
   return (
     <div id="cadastro-agendamento" className="container-cadastroagendamento">
       <Cabecalho />
@@ -151,7 +167,11 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
             </div> 
 
             {/* <Horarios hora="08:00" disponivel=false /> */}
-            <Horarios />
+            {/* <Horarios hora = "08:00" disponivel = "N" /> */}
+
+            {horarios.map((horario) => {
+              return <Horarios hora={horario.hora} disponivel={horario.disponivel} />;
+            })}
 
             <div className="input-block">
               <TextField

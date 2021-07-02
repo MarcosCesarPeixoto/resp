@@ -1,18 +1,8 @@
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import React from 'react';
+import React, { Props } from 'react';
 
 import '../../assets/styles/global.css';
 import './styles.css';
-
-const horarios = [
-  '08:00',
-  '08:30',
-  '09:00',
-  '09:30',
-  '10:00',
-  '10:30',
-  '11:00'
-]
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -35,10 +25,31 @@ function selecaoHorario() {
   console.log('clicou no selecaoHorario');
 }
 
-function Horarios() {
+interface HorariosProps {
+  hora: string;
+  disponivel?: string;
+}
+
+const Horarios: React.FC<HorariosProps> = (props) => {
+
+  let horarioRenderizado;
+  if (props.disponivel==="S"){
+    horarioRenderizado = 
+    <div className="horario-item" style={{ color:"#FFFFFF" }}>
+      {props.hora}
+    </div>;
+  } else {
+    horarioRenderizado = 
+    <div style={{ color:"#FFFFFF", background:"#C7B7B7", cursor:"none", textDecoration:"line-through" }} className="horario-item" onClick={selecaoHorario} >
+      {props.hora}
+   </div>;
+  }
+
   return(
     <div className="horario-container">
-      <div className="horario-item" style={{ color:"#FFFFFF" }}>
+      {horarioRenderizado}
+
+      {/* <div className="horario-item" style={{ color:"#FFFFFF" }}>
         08:00
       </div>
       <div className="horario-item" style={{ color:"#FFFFFF" }}>
@@ -52,7 +63,7 @@ function Horarios() {
       </div>
       <div className="horario-item" style={{ color:"#FFFFFF" }} onClick={selecaoHorario}>
         10:30
-      </div>
+      </div> */}
 
     </div>
   );
