@@ -7,6 +7,8 @@ export default class AgendamentosController {
   // Método POST
   async create(req: Request, res: Response, next: NextFunction) {
 
+    console.log(req);
+
     // Pegando o conteúdo passado no req
     const {      
       usuario_agend,
@@ -18,15 +20,14 @@ export default class AgendamentosController {
       status_agend,
       observacao_agend,
       agend_anterior_agend,
-      dh_criacao_agend,
-      dh_atualizacao_atd
+      //dh_criacao_agend,
+      //dh_atualizacao_atd
     } = req.body;
 
     // criando a transação
     const trx = await db.transaction();
 
     try {
-      
       await trx('agendamento').insert({
         usuario_agend,
         organizacao_agend,
@@ -36,7 +37,7 @@ export default class AgendamentosController {
         hora_agend,
         status_agend,
         observacao_agend,
-        agend_anterior_agend,
+        agend_anterior_agend
         });
 
       // efetuando o commit no banco de dados e enviando o status como resposta

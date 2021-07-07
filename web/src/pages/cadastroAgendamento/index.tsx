@@ -1,12 +1,8 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import { Atendimento } from '../../componentes/AtendimentoItem';  // para importar a "inteface Atendimento"
-
+import { Atendimento } from '../../componentes/AtendimentoItem';  
 import Cabecalho from '../../componentes/Cabecalho';
-// import Horarios from '../../componentes/Horarios';
 
 import api from '../../services/api';
 
@@ -41,7 +37,7 @@ interface AtendimentoItemProps {
 }
 
 const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
-
+  
   const horarios = [
     { hora: '08:00', disponivel: "N"},
     { hora: '08:30', disponivel: "S"},
@@ -50,31 +46,32 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     { hora: '10:00', disponivel: "N"},
     { hora: '10:30', disponivel: "S"}
   ]  
-
-  //console.log(atendimento.id_atd);
-  //console.log(atendimento.descricao_atd);
-
-  const { state }  = useLocation<Atendimento>();
+  
+  const history = useHistory();  
+  const { state } = useLocation<Atendimento>();
   // const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia    
   // const history = useHistory();
   
-  // const [usuario_agend, setUsuarioAgend] = useState('');
-  const [organizacao_agend, setOrganizacaoAgend] = useState('');
-  const [atendimento_agend, setAtendimentoAgend] = useState(state.id_atd);
+  const [showHorarios, setShowHorarios] = React.useState(false);
+  const [usuario_agend, setUsuarioAgend] = useState(1); //Marcos - corrigir com autenticação
+  const [organizacao_agend, setOrganizacaoAgend] = useState(state.organizacao_atd);
+  const [atendimento_agend, setAtendimentoAgend] = useState(state.id_atd);  
   const [descricao_atd,     setDescricaoAtd]     = useState(state.descricao_atd);
-  // const [colaborador_agend, setColaboradorAgend] = useState('');
-  const [data_agend, setDataAgend] = useState('');
+  const [colaborador_agend, setColaboradorAgend] = useState(0);
+  const [data_agend, setStateData] = useState('');
   const [hora_agend, setHoraAgend] = useState('');
-  // const [status_agend, setStatusAgend] = useState('');
-  // const [observacao_agend, setObservacaoAgend] = useState('');
-  // const [agend_anterior_agend, setAgendAnteriorAgend] = useState('');
+  const [status_agend, setStatusAgend] = useState(0);
+  const [observacao_agend, setObservacaoAgend] = useState('');
+  const [agend_anterior_agend, setAgendAnteriorAgend] = useState(0);
 
-  const [agendamentosNaData, setAgendamentosNaData] = useState([]); // Criando uma lista vazia de agendamentos
+  //const [agendamentosNaData, setAgendamentosNaData] = useState([]); // Criando uma lista vazia de agendamentos
 
   function buscarHorarios() {
     console.log('clicou no botão buscar: ' + data_agend);
     buscarAgendamentosNaData( );
-    console.log(agendamentosNaData);
+    // console.log(agendamentosNaData);
+    
+    setShowHorarios(true);
   }
 
   async function buscarAgendamentosNaData() {
@@ -84,7 +81,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
         organizacao_agend: state.organizacao_atd,
       }
     });
-    setAgendamentosNaData(response.data);
+    // setAgendamentosNaData(response.data);
   }
 
   interface HorariosProps {
@@ -93,45 +90,49 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   }
 
   const Horarios: React.FC<HorariosProps> = (props) => {
-
     let horarioRenderizado;
     if (props.disponivel==="S"){
       horarioRenderizado = 
-        <div className="horario-item" style={{ color:"#FFFFFF" }} onClick={(e) => { setHoraAgend( props.hora ) }}  >
+        <div className="horario-item" style={{ color:"#FFFFFF" }} onClick={(e) => { setHoraAgend( props.hora ) }} >
           {props.hora}
         </div>;
     } else {
       horarioRenderizado = 
         <div style={{ color:"#FFFFFF", background:"#C7B7B7", cursor:"none", textDecoration:"line-through" }} className="horario-item" >
           {props.hora}
-      </div>;
+        </div>;
     }
   
     return(
       <div>
-        {horarioRenderizado}
+        { horarioRenderizado }
       </div>  
     );
   }
   
   function handleIncluirAgendamento(e: FormEvent ) {
-    e.preventDefault(); 
+    e.preventDefault(); // evita ficar recarregando a página (para isso tem que passar o e: FormEvent)
     // const history = useHistory();
-    // setAtendimentoAgend({state.id_atd})   
-   
-    api.post('agendamento', {
-      // usuario_agend,
-      // organizacao_agend,
-      // atendimento_agend,
-      // colaborador_agend,
+
+    console.log({
       data_agend,
       hora_agend,
-      // status_agend,
-      // observacao_agend,
-      // agend_anterior_agend
+      atendimento_agend 
+    });
+   
+    api.post('agendamentos', {
+      usuario_agend,
+      organizacao_agend,
+      atendimento_agend,
+      colaborador_agend,
+      data_agend,
+      hora_agend,
+      status_agend,
+      observacao_agend,
+      agend_anterior_agend
     }).then(() => {
       alert('Agendamento realizado com sucesso!');
-      // history.push('/listaorganizacoes');
+      history.push('/listaatendimentos');
     }).catch((error) => { 
       if (error.response){
         alert('Erro ao tentar realizar agendamento: ResponseError = ' + error.response);
@@ -147,11 +148,57 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   //   buscaAtendimentos();
   // }, []);
 
+  function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
+    let data = e.target.value;
+    setStateData(data);
+    setShowHorarios(true); 
+  }
+
+  // function handleChangeHora() {
+  //   console.log('no handleChangeHora')
+  //   setShowHorarios(false);
+  //   console.log(showHorarios);
+  //   <ShowHorariosDisponiveis />
+  // }
+
+  function HorariosDisponiveis() {
+    return(
+      showHorarios ? 
+        <div className="input-block">
+          <Button 
+            type="button" 
+            variant="contained" 
+            color="primary"
+            style={{ borderRadius: 50 }} 
+            className="botao" 
+            onClick={buscarHorarios}>
+            Ver Horários 
+          </Button> 
+        </div> 
+      : 
+        null 
+    )
+  }
+
+  function ShowHorariosDisponiveis() {
+    return(
+      showHorarios ? 
+      <div className="horario-container">
+        {horarios.map((horario) => {
+            return <Horarios hora={horario.hora} disponivel={horario.disponivel} />;
+          })}
+      </div> 
+      : 
+      null 
+    );
+  }
+
   return (
     <div id="cadastro-agendamento" className="container-cadastroagendamento">
       <Cabecalho />
-      {state.descricao_atd}       
-      {atendimento_agend}
+      {/* {state.descricao_atd}  */}
+      {/* {atendimento_agend} */}
+      {/* Organizacao {organizacao_agend}<br></br> */}
 
       <main className="container-cadastroagendamento">
         <form onSubmit={handleIncluirAgendamento}>
@@ -180,28 +227,13 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                onChange={(e) => { setDataAgend(e.target.value) }}
+                // onChange={(e) => { setDataAgend(e.target.value) }} // funcional
+                onChange={ handleChangeData }
               /> 
               {/* <Button type="button" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" > */}
             </div>  
 
-            <div className="input-block">
-              <Button 
-                type="button" 
-                variant="contained" 
-                color="primary"
-                style={{ borderRadius: 50 }} 
-                className="botao" 
-                onClick={buscarHorarios}>
-                Ver Horários 
-              </Button> 
-            </div> 
-
-            <div className="horario-container">
-              {horarios.map((horario) => {
-                  return <Horarios hora={horario.hora} disponivel={horario.disponivel} />;
-              })}
-            </div>
+             <ShowHorariosDisponiveis />
 
             <div className="input-block">
               <TextField
@@ -217,32 +249,9 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                 inputProps={{
                   step: 900, // 5 min
                 }}
-                // onChange={(e) => { setDataAgend(e.target.value) }}
-              />             
+                // onChange={(e) => { setShowHorarios(false); }}
+              /> 
             </div>  
-
-            {/* <div className="input-block">
-              <TextField 
-                id="data_agend" 
-                label="Data" 
-                type="text" 
-                fullWidth
-                // value={data_agend} 
-
-                // onChange={(e) => { setSenhaUsuario(e.target.value) }}
-              />
-            </div>  
-
-            <div className="input-block">
-              <TextField 
-                id="hora_agend" 
-                label="Horário" 
-                type="text" 
-                fullWidth
-                // value={hora_agend} 
-                // onChange={(e) => { setEmailUsuario(e.target.value) }}
-              />
-            </div> */}
 
             <div className="input-block">
               <br></br>
@@ -261,6 +270,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
 };
 
 export default CadastroAgendamento;
+
 
 
 // CREATE TABLE "agendamento" (
