@@ -9,6 +9,7 @@ import api from '../../services/api';
 import '../../assets/styles/global.css';
 import './styles.css';
 import { Button, createMuiTheme, TextField, ThemeProvider } from '@material-ui/core';
+import { stringify } from 'querystring';
 
 const theme = createMuiTheme({
   palette: {
@@ -95,7 +96,6 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   async function buscarHorarios(data: string) {
     buscarAgendamentosNaData(data);
     atualizarHorariosDisponiveis();
-    // setShowHorarios(true);  // comentado aqui pq executa em async
   }  
 
   async function buscarAgendamentosNaData(data: string) {
@@ -110,15 +110,19 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
 
   async function atualizarHorariosDisponiveis() {
     // Percorre o objeto com os horários padrões setando disponível false se já estiver agendamento para ele
+    // let horario = horariospadroes;
+
     horarios.map((horario, index) => {
       horario.disponivel = 'S'; 
       agendamentosNaData.map((agendamento: Agendamento) => { 
         if(horario.hora === agendamento.hora_agend) {
           horario.disponivel = 'N'; 
         }
-        return horario;
+        // return horario;
       });
+      return horario;
     });
+
     // setShowHorarios(true);
   }
 
@@ -175,16 +179,16 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     });
   }
 
-  async function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
     let data = e.target.value;
     setStateData(data);
     buscarHorarios(data);
     setShowHorarios(true);  // manter comentado msm
   }
-
-  function ShowHorariosDisponiveis() {
+    
+  function ShowHorariosDisponiveis(props: any) {
     return(
-      showHorarios ? 
+      props.showHorarios ? 
       <div className="horario-container">
         {horarios.map((horario) => {
             return <Horarios hora={horario.hora} disponivel={horario.disponivel} />;
@@ -232,7 +236,8 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
               /> 
             </div>  
 
-             <ShowHorariosDisponiveis />
+             {/* <ShowHorariosDisponiveis /> */}
+             <ShowHorariosDisponiveis showHorarios={showHorarios}/>
 
             <div className="input-block">
               <TextField
