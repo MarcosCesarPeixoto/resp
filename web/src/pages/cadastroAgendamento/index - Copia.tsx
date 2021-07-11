@@ -27,17 +27,6 @@ const theme = createMuiTheme({
   },
 });
 
-const horariospadroes = [
-  { hora: '08:00', disponivel: "S"},
-  { hora: '08:30', disponivel: "S"},
-  { hora: '09:00', disponivel: "S"},
-  { hora: '09:30', disponivel: "S"},
-  { hora: '10:00', disponivel: "S"},
-  { hora: '10:30', disponivel: "S"}
-]  
-
-let horarios = horariospadroes;
-
 export interface Horario {
   hora: string;
   disponivel: string;
@@ -47,29 +36,22 @@ interface AtendimentoItemProps {
   atendimento: Atendimento;
 }
 
-export interface Agendamento {
-  usuario_agend: number;
-  organizacao_agend: number;
-  atendimento_agend: number;
-  colaborador_agend: number;
-  data_agend: string;
-  hora_agend: string;
-  status_agend: number;
-  observacao_agend: string;
-  agend_anterior_agend: string;
-}
-
-// interface AgendamentoItemProps {
-//   agendamento: Agendamento;
-// }
-
 const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
+  
+  const horarios = [
+    { hora: '08:00', disponivel: "N"},
+    { hora: '08:30', disponivel: "S"},
+    { hora: '09:00', disponivel: "S"},
+    { hora: '09:30', disponivel: "S"},
+    { hora: '10:00', disponivel: "N"},
+    { hora: '10:30', disponivel: "S"}
+  ]  
   
   const history = useHistory();  
   const { state } = useLocation<Atendimento>();
   // const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia    
     
-  const [showHorarios, setShowHorarios] = React.useState(false);  
+  const [showHorarios, setShowHorarios] = React.useState(false);
   const [usuario_agend, setUsuarioAgend] = useState(1); //Marcos - corrigir com autenticação
   const [organizacao_agend, setOrganizacaoAgend] = useState(state.organizacao_atd);
   const [atendimento_agend, setAtendimentoAgend] = useState(state.id_atd);  
@@ -83,43 +65,29 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
 
   const [agendamentosNaData, setAgendamentosNaData] = useState([]); // Criando uma lista vazia de agendamentos
 
-  // não sei porque, a primeira execução sempre retorna vazio, então força a primeira execução com data vazia
-  useEffect(() => {
-    buscarAgendamentosNaData('1900-01-01');
-  }, []);
+  function buscarHorarios(data: string) {
+    console.log('no buscarHorarios(): ' + data);
 
-  useEffect(() => {
-    buscarHorarios('1900-01-01');
-  }, []);
-
-  async function buscarHorarios(data: string) {
-    buscarAgendamentosNaData(data);
-    atualizarHorariosDisponiveis();
-    // setShowHorarios(true);  // comentado aqui pq executa em async
-  }  
+    buscarAgendamentosNaData(data); // Marcos aqui
+        
+    setShowHorarios(true);
+  }
 
   async function buscarAgendamentosNaData(data: string) {
+
+    console.log("no buscarAgendamentosNaData(): data=" + data );
+
     const response = await api.get('agendamentos', {
       params: { 
-        data_agend: data,
+        // data_agend: data,
         organizacao_agend: state.organizacao_atd,
       }
     });
-    setAgendamentosNaData(response.data); 
-  }
 
-  async function atualizarHorariosDisponiveis() {
-    // Percorre o objeto com os horários padrões setando disponível false se já estiver agendamento para ele
-    horarios.map((horario, index) => {
-      horario.disponivel = 'S'; 
-      agendamentosNaData.map((agendamento: Agendamento) => { 
-        if(horario.hora === agendamento.hora_agend) {
-          horario.disponivel = 'N'; 
-        }
-        return horario;
-      });
-    });
-    // setShowHorarios(true);
+    setAgendamentosNaData(response.data);
+    console.log(agendamentosNaData);
+    // aqui tem que pegar o que vem no retorno
+
   }
 
   interface HorariosProps {
@@ -150,6 +118,13 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   
   function handleIncluirAgendamento(e: FormEvent ) {
     e.preventDefault(); // evita ficar recarregando a página (para isso tem que passar o e: FormEvent)
+    // const history = useHistory();
+
+    // console.log({
+    //   data_agend,
+    //   hora_agend,
+    //   atendimento_agend 
+    // });
    
     api.post('agendamentos', {
       usuario_agend,
@@ -175,14 +150,52 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     });
   }
 
-  async function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
+  // useEffect(() => {
+  //   buscaAtendimentos();
+  // }, []);
+
+  function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
     let data = e.target.value;
     setStateData(data);
+
+    console.log('antes de buscarHorarios, onde data=' + data + ' - data_agend=' + data_agend);
+
+    // Marcos - acredito que aqui tem que buscar os horarios disponíveis
     buscarHorarios(data);
-    setShowHorarios(true);  // manter comentado msm
+
+
+
+    setShowHorarios(true); 
   }
 
+  // function handleChangeHora() {
+  //   console.log('no handleChangeHora')
+  //   setShowHorarios(false);
+  //   console.log(showHorarios);
+  //   <ShowHorariosDisponiveis />
+  // }
+
+  // function HorariosDisponiveis() {
+  //   return(
+  //     showHorarios ? 
+  //       <div className="input-block">
+  //         <Button 
+  //           type="button" 
+  //           variant="contained" 
+  //           color="primary"
+  //           style={{ borderRadius: 50 }} 
+  //           className="botao" 
+  //           onClick={buscarHorarios}>
+  //           Ver Horários 
+  //         </Button> 
+  //       </div> 
+  //     : 
+  //       null 
+  //   )
+  // }
+
   function ShowHorariosDisponiveis() {
+
     return(
       showHorarios ? 
       <div className="horario-container">
@@ -214,6 +227,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                 value={descricao_atd}
                 type="text" 
                 fullWidth 
+                // onChange={(e) => { setNomeUsuario(e.target.value) }}
               /> 
             </div>
 
@@ -228,8 +242,10 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
+                // onChange={(e) => { setDataAgend(e.target.value) }} // funcional
                 onChange={ handleChangeData }
               /> 
+              {/* <Button type="button" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" > */}
             </div>  
 
              <ShowHorariosDisponiveis />
@@ -248,6 +264,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
                 inputProps={{
                   step: 900, // 5 min
                 }}
+                // onChange={(e) => { setShowHorarios(false); }}
               /> 
             </div>  
 
