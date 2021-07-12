@@ -29,8 +29,6 @@ const ListaAtendimentos: React.FC = () => {
   const { state }  = useLocation<Organizacao>();
   const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia 
 
-  let carregouDados = false;
-
   async function buscaAtendimentos() {
     const response = await api.get('atendimentos' , {
       params: {

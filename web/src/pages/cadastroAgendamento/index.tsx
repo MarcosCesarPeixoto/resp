@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Atendimento } from '../../componentes/AtendimentoItem';  
@@ -9,7 +9,6 @@ import api from '../../services/api';
 import '../../assets/styles/global.css';
 import './styles.css';
 import { Button, createMuiTheme, TextField, ThemeProvider } from '@material-ui/core';
-import { stringify } from 'querystring';
 
 const theme = createMuiTheme({
   palette: {
@@ -68,62 +67,56 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   
   const history = useHistory();  
   const { state } = useLocation<Atendimento>();
-  // const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia    
-    
+      
   const [showHorarios, setShowHorarios] = React.useState(false);  
   const [usuario_agend, setUsuarioAgend] = useState(1); //Marcos - corrigir com autenticação
-  const [organizacao_agend, setOrganizacaoAgend] = useState(state.organizacao_atd);
-  const [atendimento_agend, setAtendimentoAgend] = useState(state.id_atd);  
-  const [descricao_atd,     setDescricaoAtd]     = useState(state.descricao_atd);
+  const [organizacao_agend] = useState(state.organizacao_atd);
+  const [atendimento_agend] = useState(state.id_atd);  
+  const [descricao_atd]     = useState(state.descricao_atd);
   const [colaborador_agend, setColaboradorAgend] = useState(0);
   const [data_agend, setStateData] = useState('');
   const [hora_agend, setHoraAgend] = useState('');
-  const [status_agend, setStatusAgend] = useState(0);
+  const [status_agend] = useState(0);
   const [observacao_agend, setObservacaoAgend] = useState('');
-  const [agend_anterior_agend, setAgendAnteriorAgend] = useState(0);
+  const [agend_anterior_agend] = useState(0);
 
   const [agendamentosNaData, setAgendamentosNaData] = useState([]); // Criando uma lista vazia de agendamentos
 
-  // não sei porque, a primeira execução sempre retorna vazio, então força a primeira execução com data vazia
-  useEffect(() => {
-    buscarAgendamentosNaData('1900-01-01');
-  }, []);
-
-  useEffect(() => {
-    buscarHorarios('1900-01-01');
-  }, []);
-
-  async function buscarHorarios(data: string) {
-    buscarAgendamentosNaData(data);
-    atualizarHorariosDisponiveis();
-  }  
-
   async function buscarAgendamentosNaData(data: string) {
+    setAgendamentosNaData([]);
+
     const response = await api.get('agendamentos', {
       params: { 
         data_agend: data,
         organizacao_agend: state.organizacao_atd,
       }
     });
+
+    // Postar no stackOverFlow - Pq se passar "horarios = await atualizarHorariosDisponiveis(agendamentosNaData);" fica desatualizado, sempre um registro atrás o processamento
     setAgendamentosNaData(response.data); 
+    horarios = atualizarHorariosDisponiveis(response.data);
+    // outra postagem, porque se colocar "horarios = await atualizarHorariosDisponiveis(response.data);" dá mensagem: 'await' has no effect on the type of this expression
+
+    return true;
   }
-
-  async function atualizarHorariosDisponiveis() {
+  
+  function atualizarHorariosDisponiveis(data: any) {    
     // Percorre o objeto com os horários padrões setando disponível false se já estiver agendamento para ele
-    // let horario = horariospadroes;
+    let horariosret = horariospadroes;
 
-    horarios.map((horario, index) => {
-      horario.disponivel = 'S'; 
-      agendamentosNaData.map((agendamento: Agendamento) => { 
+    horariosret.map((horario, index) => {
+      horario.disponivel = 'S';
+      
+      data.map((agendamento: Agendamento) => { 
         if(horario.hora === agendamento.hora_agend) {
           horario.disponivel = 'N'; 
         }
-        // return horario;
+        return horario;
       });
       return horario;
     });
 
-    // setShowHorarios(true);
+    return horariosret;
   }
 
   interface HorariosProps {
@@ -179,13 +172,21 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     });
   }
 
-  function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
+    setAgendamentosNaData([]);
+    setShowHorarios(false); 
+
     let data = e.target.value;
+    let pronto = false;
+
     setStateData(data);
-    buscarHorarios(data);
-    setShowHorarios(true);  // manter comentado msm
-  }
     
+    pronto = await buscarAgendamentosNaData(data);
+   if(pronto) {
+      setShowHorarios(true); 
+   }
+  }
+ 
   function ShowHorariosDisponiveis(props: any) {
     return(
       props.showHorarios ? 
@@ -202,9 +203,6 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   return (
     <div id="cadastro-agendamento" className="container-cadastroagendamento">
       <Cabecalho />
-      {/* {state.descricao_atd}  */}
-      {/* {atendimento_agend} */}
-      {/* Organizacao {organizacao_agend}<br></br> */}
 
       <main className="container-cadastroagendamento">
         <form onSubmit={handleIncluirAgendamento}>
@@ -236,7 +234,6 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
               /> 
             </div>  
 
-             {/* <ShowHorariosDisponiveis /> */}
              <ShowHorariosDisponiveis showHorarios={showHorarios}/>
 
             <div className="input-block">
