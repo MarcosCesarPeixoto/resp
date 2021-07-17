@@ -1,0 +1,149 @@
+
+Criando o front-end
+web app
+
+Adicionar as figuras que serão usadas no projeto.
+Copiar do XD
+
+Parei na Vídeo Aula 3
+40 minutos
+
+
+
+1:10 sobre a Landing com inserção de imagens e icones
+
+Finalizada aula 3, mas não está responsivo
+
+------
+Aula 4
+Criada pasta organizacaolista
+
+Criada routes.tssx
+
+pare em Aula 4 - 17 minutos - criando listaorganizacoes
+
+em 22 min explica como colocar SPA
+em 55 min criando componentes com props
+
+em 1:00 hrs criando o formulario
+
+1:10 estilização de inputs
+
+1:27 lista de teachers
+1:57 criando um componente que vai se repetir inumeras vezes (item list) - card de ListItens
+
+
+
+
+------ Catalinea
+-tamanhos dinâmicos: diminuir e aumentar de acordo com tamanho da tela: mimmax(400px, 900px)
+
+-ajuste automatico: auto-fit -> coloca quantas colunas couber na linha
+
+-Definição de áreas: <<-- muitos detalhes legais.
+
+-Atalhos
+
+-Alinhamentos: 
+justify-content
+align-content 
+justify-items
+
+
+
+Quanto às aulas
+===============
+Aula 4:
+2min - Criando uma lista de coaches
+
+12min - Criando componente Router
+
+20min - Trocando href por Links
+
+
+Aula 6:
+===============
+
+4min passando props exibindo  ou não em diferentes formularios.
+
+12min - Criação do formuláraio de cadastro de coach
+17min - Estilizando coachform
+
+28 min separando inputs
+
+ate 58:00 estilizações formcoach
+
+58:00 criação componente TextArea (biografia do coach)
+
+----------------------
+1:08:00 até 01:30:00 - Criaça componente Select das Matérias
+
+01:30:00 até 01:32:00 - Criação de componentes select do CoachList para Materia e Dia da Semana
+
+01:32:00 - Calendário das aulas em CoachForm   << ------ Vou precisar para estabelecer horários de atendimentos. 
+01:40:00 - Estilização do CoachForm referente horário das aulas.
+
+01:45:00 - Adicionando varios horários pelo botão + Horario - CoachForm - Utilizando map scheduleItem - 
+	Conceito de state (estado) ac
+	Evento no Button onclick
+
+1:50 novo horario - Biblioteca useState (1:58)
+
+----------------------
+02:00 - Conexao com server
+
+02:05:00 - Tratando inserção com backend
+	Instalação do axios
+
+02:10 totalConnections - 
+
+----------------------
+
+02:15 - CoachForm + api
+handle
+
+----------------------
+
+02:16 - Acertos no form tornando-o submit para enviar dados ao servidor.
+
+02:29 - Enviando professor
+
+02:35 - Percorre um array pela função map e altera o elemento do vetor (usar no agendamento para alterar a hora indisponivel para agendamento)
+
+02:47 - Salvando coach no banco de dados
+
+02:50 - Consulta no insominia
+
+02:56 - Redirect após post
+
+03:00 - Fazendo CoachList (lista de professores)
+
+03:15 - Fazendo get() de coaches
+
+03:20 - Tratando o retorno da consulta
+
+03:25 - FC - FunctionComponent
+
+03:30 - Acertando BO referente ao coach do tipo coach
+
+03:37 - Entrar em contato via whatsapp
+
+03:57 - Programando botão de consultar
+----------------------
+
+
+Exemplo de como está o endereço de logo
+file:///C:/posgraduacao/resp/web/src/assets/images/lixo/logo4.png
+
+
+
+parei em 2:54
+
+
+
+
+
+
+
+
+

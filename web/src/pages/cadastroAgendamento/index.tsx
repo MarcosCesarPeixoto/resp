@@ -9,6 +9,7 @@ import api from '../../services/api';
 import '../../assets/styles/global.css';
 import './styles.css';
 import { Button, createMuiTheme, TextField, ThemeProvider } from '@material-ui/core';
+import { abort } from 'process';
 
 const theme = createMuiTheme({
   palette: {
@@ -147,6 +148,11 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   
   function handleIncluirAgendamento(e: FormEvent ) {
     e.preventDefault(); // evita ficar recarregando a página (para isso tem que passar o e: FormEvent)
+
+    if ((!data_agend) || (!hora_agend)) {
+      alert('Data e Hora precisam ser preenchidos!');
+      return;
+    }
    
     api.post('agendamentos', {
       usuario_agend,
@@ -158,9 +164,27 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
       status_agend,
       observacao_agend,
       agend_anterior_agend
+    // }).then(response => {
+    //   console.log(response.status);
+    //   if (response.status === 201){
+    //     return response.data;
+    //   } 
     }).then(() => {
       alert('Agendamento realizado com sucesso!');
-      history.push('/listaatendimentos');
+      // marcos - aqui -redirecionar para a lista de agendamentos do usuario.      
+      // history.push('/listaatendimentos', );
+      // ver aqui: https://qastack.com.br/programming/44121069/how-to-pass-params-with-history-push-link-redirect-in-react-router-v4
+
+      // history.push({
+      //   pathname: '/listaagendamentos',
+      //   state: { params: 
+      //             {organizacao_agend: state.organizacao_atd,
+      //              usuario_agend: usuario_agend,
+      //              status_agend: status_agend
+      //             } 
+      //          }
+      // });
+
     }).catch((error) => { 
       if (error.response){
         alert('Erro ao tentar realizar agendamento: ResponseError = ' + error.response);
@@ -182,7 +206,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     setStateData(data);
     
     pronto = await buscarAgendamentosNaData(data);
-   if(pronto) {
+    if(pronto) {
       setShowHorarios(true); 
    }
   }

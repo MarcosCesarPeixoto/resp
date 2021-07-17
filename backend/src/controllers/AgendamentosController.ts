@@ -83,40 +83,62 @@ export default class AgendamentosController {
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
     try {
+      const { getNumerado } = req.query;
+      const { statusIn } = req.query;
+      const statusIn2 = '(1)';
+      const { dataInicio } = req.query;
+      const { dataFim } = req.query;
+
       const { id_agend } = req.query;
       const { usuario_agend } = req.query; 
       const { data_agend } = req.query; 
       const { organizacao_agend } = req.query; 
+      const { status_agend } = req.query;
+      
+      console.log(req.params);
 
-      console.log(organizacao_agend);
+      // console.log('Org: ' + organizacao_agend);
+      // console.log('Usu: ' + usuario_agend);
+      // console.log('Sta: ' + status_agend);
 
       const query = db('agendamento');
-
-      // "2021-07-11"
-      console.log(data_agend);
-      let filtrodata = "(data_agend=" + `"` + data_agend + `"`+ ")";
-      console.log(filtrodata);
-
-      if (id_agend) {
-        query.where({ id_agend });
-      } else if (usuario_agend) {
-        query.where({ usuario_agend });
-      } else if (data_agend) {
-        if (data_agend && organizacao_agend) {
-          console.log(organizacao_agend + " - " + data_agend);
+      
+      if (!getNumerado){
+        console.log('não é getNumerado');
+        if (usuario_agend && organizacao_agend && status_agend) {
+          console.log('aqui');
           query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
-          query.whereRaw(filtrodata);
+          query.whereRaw("(usuario_agend=" + usuario_agend + ")");
+          query.whereRaw("(status_agend=" + status_agend + ")");        
+        } else if (usuario_agend) {
+          query.where({ usuario_agend });
         } else if (data_agend) {
-          query.where({ data_agend });
+          if (data_agend && organizacao_agend) {
+            console.log(organizacao_agend + " - " + data_agend);
+            query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
+            query.whereRaw(filtrodata);
+          } else if (data_agend) {
+            query.where({ data_agend });
+          }
+        } else if (id_agend) {
+          query.where({ id_agend });
         }
-      }
+      } else {
+        if (getNumerado==='1'){  // get por Usuario + Periodo Inicial/Final + Status {        
+          console.log('getNumerado'); 
+          query.whereRaw("(usuario_agend=" + usuario_agend + ")");
+          query.whereRaw("(data_agend between " + dataInicio + " and " + dataFim + ")");
+          query.whereRaw("(status_agend in " + statusIn + ")");
+          query.orderBy('data_agend', 'hora_agend');
+        } else {
+          return res.json('Erro inexperado - 501');
+        }
+      } 
 
       const results = await query;
 
       console.log(results);
-      return res.json(results);
-
-      
+      return res.json(results);      
 
     } catch(error) {
       next(error);

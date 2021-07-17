@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+
 import Principal from './pages/principal';
 import Organizacao from './pages/organizacao'
 import CadastroUsuario from './pages/cadastroUsuario'
@@ -7,6 +8,7 @@ import CadastroAgendamento from './pages/cadastroAgendamento';
 
 import ListaOrganizacoes from './pages/listaorganizacoes/index'
 import ListaAtendimentos from './pages/listaatendimentos';
+import ListaAgendamentos from './pages/listaagendamentos';
 
 function Routes() {
   return (
@@ -19,6 +21,7 @@ function Routes() {
 
       <Route path="/listaorganizacoes" component={ListaOrganizacoes} />
       <Route path="/listaatendimentos" component={ListaAtendimentos} />
+      <Route path="/listaagendamentos" component={ListaAgendamentos} />
 
     </BrowserRouter>
   );

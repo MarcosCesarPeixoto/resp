@@ -1,0 +1,37 @@
+Focar
+ok 1) Criar o cabeçalho e estilizar
+ok	a)Logo e Nome do Logado
+ok	b)Menus
+
+2) Adequar Lista Organização
+	ok a) Adequar com novo componente Cabeçalho
+	ok b) Fazer nova estilização
+
+ok 3) Criar formulário de cadastro de usuário
+
+4) Criar formulário de cadastro de organizações
+
+5) Criar formulário de cadastro de atendimentos
+
+6) Adequaer lista de Emnpresas/Organizações
+
+7) Criar lista de Atendimentos por Organização
+
+8) Criar cadastro de Agendamento do usuário
+
+->> 9) Criar consulta de agendamentos do usuário
+
+10) Criar rotina de favoritar/desfavoritar
+
+
+========
+Fazer:
+
+ok-Criar rotina para ler os agendamentos já existentes da data e retirar da lista de disponíveis.
+-Redirecionar de volta para atendimentos da organização após salvar agendamento(ou para lista de agendamentos...)
+-Adicionar o campo de observação.
+
+-Dividir os horários em 3 colunas (manhã / tarde / noite )
+
+-tratar autenticação, passando o usuário para cada formulario carregado ??
+

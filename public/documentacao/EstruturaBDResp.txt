@@ -1,0 +1,158 @@
+usuario
+nome_usuario: string, 30
+email_usuario: string, 30
+senha_usuario: string, 255
+
+usuario_complemento
+usuario_usucompl: integer (fk de usuario)
+celular_usucompl: string, 14
+whatsapp_usucompl: boolean
+telegram_usucompl: boolean
+endereco_usucompl: string, 60
+complemento_usucompl: string, 20
+bairro_usucompl: string, 30
+cep_usucompl:string, 8
+cidade_usucompl: integer
+uf_usucompl: string, 2
+
+
+organizacao
+razaosocial_org, string, 60
+atividade_org, integer [são de beleza/estética, consultorio médico, consultório odontológica, serviços de eletrecista, serviços de bombeiro hidráulico, 		manutenção ar condicionado, manutençaõ computadores, suporte sistemas, igrejas/associação religiosa, associação diversa, ...]
+endereco_org, string, 60
+complemento_org, string, 30
+numero_org, string, 20
+bairro_org, string, 30
+cep_org, string, 8
+cidade_org, integer
+uf_org, string, 2
+
+fisicojuridico_org
+cnpj_org, string, 14
+cpf_org, string, 11
+telefone_org, string, 14
+celular_org, string, 14
+logomarca_org 
+
+
+colaborador (participante)
+nome_colab, string, 60
+email_colab, string, 60
+celular_colab, string, 14
+confirmado_colab, boolean
+organizacao_colab, integer
+
+atendimento
+tipo_atend, integer [1-serviço; 2-atendimento]
+descricao_atend, string, 60
+usuario_escolhe_atend, boolean (permite que seja definido se o usuário poderá ou não escolher o atendente)
+cobrado_atend, boolean
+valor_atend, real
+comissão_atend, real
+tempo_estimado_atend, time
+horario_padrao_atend, time
+
+
+favoritas
+usuario_fav
+organizacao_fav
+datahora_vinculo_fav, date_time
+datahora_desvinculo_fav, date_time
+
+agendamento
+usuario_agend, integer
+organizacao_agend, integer
+atendimento_agend, integer,
+data_agend, date
+hora_agend, time
+status_agend, integer
+agend_anterior_agend (quando um agendamento parte de um agendamento anterior), integer
+observacao_agend, memo
+
+---
+
+O que prototipar ?
+
+Lista de Organizações (com agendamentos pendentes ou favoritadas)
+
+
+
+
+
+
+
+
+Parei na aula 3.4
+Curso: Adobe XD: Design visual de uma site mobile.
+
+
+-- 
+Criando o backend
+https://www.youtube.com/watch?v=YGHN0FQ8jj8&ab_channel=Fl%C3%A1vioAugustodeFreitas
+aula  5
+parei em 30 min
+-
+tratamento do problema com sqlite e migrations no whatsapp - dia 09/02 e 10/02
+
+
+1:15 - knex - connections.ts
+1:17 - knexfile.ts
+
+
+comando: 
+yarn knex:migrate
+
+
+
+
+---
+"scripts": {
+    "start": "ts-node-dev --transpile-only --ignore-watch node-modules --respawn src/server.ts",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+    // "knex:migrate": "knex --knexfile.ts migrate:lastest",
+    // "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+  },
+
+  // "scripts": {
+  //   "start": "tsnd --transpile-only src/server.ts --ignore-watch node_modules --respawn",
+  //   "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
+  //   "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+  // },
+
+
+
+---
+Tentativas:
+npm install ts-node --save-dev conforme -> https://stackoverflow.com/questions/40910864/cannot-find-module-ts-node-register
+Status: Não resolveu
+
+
+Tentativa de rodar com:
+yarn knex:migrate
+ou 
+knex migrate:latest
+
+Ver sobre HeidSQL para MySql	
+7
+
+-----
+
+Desenvolvimento:
+Aula 5 - 
+58 min - Delete
+59 min - paginação no corpo da requisição, filtros, ordenação, etc...
+
+1:04 - Layout
+1:08 - Instalação Knex e sqlite3
+
+1:13 - Como usar o Knex
+1:19 - Configurando knexfile.ts
+1:20 - Cria as migrations
+1:24 - Configuração das migrations no arquivo package.json
+... outras migrations
+
+1:39 - Criação de rotas
+
+
+
