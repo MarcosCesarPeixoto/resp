@@ -59,7 +59,6 @@ routes.delete('/favoritos/:usuario_fav/organizacao/:organizacao_fav', favoritosC
 
 routes.post('/agendamentos', agendamentosController.create);
 routes.get('/agendamentos', agendamentosController.index);
-// routes.get('/agendamentosdata', agendamentosController.indexnadata);
 routes.put('/agendamentos/:id_agend', agendamentosController.update);
 routes.delete('/agendamentos/:id_agend', agendamentosController.delete);
 

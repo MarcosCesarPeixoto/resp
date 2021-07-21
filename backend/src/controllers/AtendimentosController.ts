@@ -58,7 +58,6 @@ export default class AtendimentosController {
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      // const { id_atd } = req.query;
       var id_atd = req.query.id_atd;
       var organizacao_atd = req.query.organizacao_atd;
       

@@ -19,9 +19,7 @@ export default class AgendamentosController {
       hora_agend,
       status_agend,
       observacao_agend,
-      agend_anterior_agend,
-      //dh_criacao_agend,
-      //dh_atualizacao_atd
+      agend_anterior_agend
     } = req.body;
 
     // criando a transação
@@ -52,40 +50,18 @@ export default class AgendamentosController {
     };    
   }
 
-  // // Método GET
-  // async index(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const filtros = req.query;
-
-  //     const id_agend          = filtros.id_agend as string;
-  //     const usuario_agend     = filtros.usuario_agend as string;
-  //     const data_agend        = filtros.data_agend as string;
-  //     const organizacao_agend = filtros.organizacao_agend as string;
- 
-  //     // if (id_agend){
-  //       const agendamentos = await db("agendamento")
-  //       .whereRaw('`agendamento`.`organizacao_agend` = ??', Number(organizacao_agend));
-  //       // .whereRaw('`agendamento`.`organizacao_agend` = ??', [Number(organizacao_agend)])
-               
-  //     // }
-  //     // const agendamentos = await db("agendamento")
-  //     //   .whereRaw('`agendamento`.`organizacao_agend` = ??', [Number(organizacao_agend)])
-  //     //   // .whereRaw('`agendamento`.`data_agend` = ??',  [Date(data_agend)]);
-  //     //   .whereRaw('`agendamento`.`data_agend` = ??',  [data_agend]);
-
-  //     return response.json(agendamentos);
-
-  //   } catch(error) {
-  //     next(error);
-  //   }
-  // }
-
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
-    try {
+    try { 
+      console.log(req.query);
+
+      // var getNumerado = req.query.getNumerado;
+      // var statusIn    = req.query.statusIn;
+      // var dataInicio  = req.query.dataInicio;
+      // var dataFim     = req.query.dataFim;
+
       const { getNumerado } = req.query;
       const { statusIn } = req.query;
-      const statusIn2 = '(1)';
       const { dataInicio } = req.query;
       const { dataFim } = req.query;
 
@@ -94,19 +70,35 @@ export default class AgendamentosController {
       const { data_agend } = req.query; 
       const { organizacao_agend } = req.query; 
       const { status_agend } = req.query;
-      
-      console.log(req.params);
 
-      // console.log('Org: ' + organizacao_agend);
-      // console.log('Usu: ' + usuario_agend);
-      // console.log('Sta: ' + status_agend);
+      console.log({
+        getNumerado,
+        usuario_agend,
+        dataInicio,
+        dataFim,
+        statusIn
+      });
 
-      const query = db('agendamento');
-      
-      if (!getNumerado){
+      var query = db('agendamento');
+      if (getNumerado) {  // getNumerado é quando passa como parâmetro um número de get para ser executado para atender diversos tipos de requerimentos
+        if (getNumerado==='1'){  // get por Usuario + Periodo Inicial/Final + Status {        
+          console.log('getNumerado'); 
+          query.leftJoin('organizacao', 'agendamento.organizacao_agend', 'organizacao.id_org');
+          query.whereRaw("(usuario_agend=" + usuario_agend + ")");
+
+          query.whereRaw("(data_agend between '" + dataInicio + "' and '" + dataFim + "')");
+          // query.whereBetween('data_agend', [dataInicio, dataFim]); // ==>> essa bosta não funciona
+
+          query.whereRaw("(status_agend in " + statusIn + ")");
+          query.orderBy('data_agend', 'hora_agend');
+
+          console.log(query.toQuery() );
+        } else {
+          return res.json('Erro inexperado - 501');
+        }
+      } else {  
         console.log('não é getNumerado');
         if (usuario_agend && organizacao_agend && status_agend) {
-          console.log('aqui');
           query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
           query.whereRaw("(usuario_agend=" + usuario_agend + ")");
           query.whereRaw("(status_agend=" + status_agend + ")");        
@@ -114,83 +106,25 @@ export default class AgendamentosController {
           query.where({ usuario_agend });
         } else if (data_agend) {
           if (data_agend && organizacao_agend) {
-            console.log(organizacao_agend + " - " + data_agend);
             query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
-            query.whereRaw(filtrodata);
+            query.whereRaw("(data_agend=" + data_agend + ")");
+            query.orderBy('organizacao_agend', 'data_agend');
           } else if (data_agend) {
             query.where({ data_agend });
           }
         } else if (id_agend) {
           query.where({ id_agend });
         }
-      } else {
-        if (getNumerado==='1'){  // get por Usuario + Periodo Inicial/Final + Status {        
-          console.log('getNumerado'); 
-          query.whereRaw("(usuario_agend=" + usuario_agend + ")");
-          query.whereRaw("(data_agend between " + dataInicio + " and " + dataFim + ")");
-          query.whereRaw("(status_agend in " + statusIn + ")");
-          query.orderBy('data_agend', 'hora_agend');
-        } else {
-          return res.json('Erro inexperado - 501');
-        }
-      } 
+      }   
 
       const results = await query;
-
       console.log(results);
-      return res.json(results);      
-
+      return res.json(results);
+    
     } catch(error) {
       next(error);
-    }
+    };
   }
-
-  // // Método GET
-  // async indexnadata(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { usuario_agend } = req.query;      
-  //     const { data_agend } = req.query;      
-  //     const { organizacao_agend } = req.query;   
-
-  //     console.log(organizacao_agend);
-
-  //     const query = db.select('hora_agend').from('agendamento');
-  //     if (data_agend && organizacao_agend) {
-  //       console.log(organizacao_agend + " - " + data_agend);
-  //       query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
-  //       query.whereRaw("(data_agend=" + data_agend + ")");
-  //     }
-
-  //     const results = await query;
-  //     return res.json(results);
-
-  //   } catch(error) {
-  //     next(error);
-  //   }
-  // }
-
-
-  // // Método GET
-  // async index2(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { id_atd } = req.query;
-  //     const { organizacao_atd } = req.query;
-
-  //     const query = db('atendimento');
-
-  //     if (id_atd) {
-  //       query.where({ id_atd });
-  //     } else if (organizacao_atd) {
-  //       query.where({ organizacao_atd });
-  //     }
-
-  //     const results = await query;
-  //     return res.json(results);
-
-  //   } catch(error) {
-  //     next(error);
-  //   }
-  // }
 
   // Método PUT
   async update(req: Request, res: Response, next: NextFunction) {
@@ -245,5 +179,4 @@ export default class AgendamentosController {
       next(error);
     }
   }
-
 }

@@ -9,9 +9,11 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Cabecalho from "../../componentes/Cabecalho";
 // import CheckStatus from "../../componentes/CheckStatus";
 
+import AgendamentoItem, { Agendamento } from '../../componentes/AgendamentoItem';
+
 import './styles.css';
 
-import { Button, createMuiTheme, createStyles, makeStyles, TextField, Theme, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, createStyles, makeStyles, TextField, Theme } from "@material-ui/core";
 import Titulo from "../../componentes/Titulo";
 import api from "../../services/api";
 
@@ -43,53 +45,59 @@ const useStyles = makeStyles((theme2: Theme) =>
   }),
 );
 
-
 function ListaAgendamentos() {
-  const [getNumerado] = useState(1); 
-
-  const [usuario_agend, setUsuarioAgend] = useState(1);
-
-  const [dataInicio, setDataInicio] = useState('');
-  const [dataFim, setDataFim] = useState('');
-
-  const [statusAguardando, setStatusAguardando] = useState('checked');
-  const [statusConfirmado, setStatusConfirmado] = useState('checked');
-  const [statusRealizado, setStatusRealizado] = useState('unchecked');
-
   // const classes = useStyles();
+  const [agendamentos, setAgendamentos] = useState([]); // Criando uma lista vazia de agendamentos
+
+  const [getNumerado] = useState(1); 
+  const [usuario_agend, setUsuarioAgend] = useState(1);
+  const [dataInicio, setDataInicio] = useState('');
+  const [dataFim, setDataFim] = useState('');  
+  const [status, setState] = useState({
+    Aguardando: true,
+    Confirmado: true,
+    Realizado: true
+  });
+
+  const handleChange = (event: any) => {
+    setState({ ...status, [event.target.name]: event.target.checked });
+  };
 
   async function buscarListaAgendamentos(e: FormEvent) {
     e.preventDefault();
 
     let statusIn = ''; 
-    if(statusAguardando==='checked'){
+    if(status.Aguardando){
       statusIn = '0';
     }
-    if(statusConfirmado==='checked'){
+    if(status.Confirmado){
       if(statusIn !== ''){
         statusIn = statusIn + ',';
       }
       statusIn = statusIn + '1';  
     }
-    if(statusRealizado==='checked'){
+    if(status.Realizado){
       if(statusIn !== ''){
         statusIn = statusIn + ',';
       }
       statusIn = statusIn + '2';  
     }
     if(statusIn === ''){
-      alert('Pelo menos um `"Status Desejado"` deve ser informado!');
+      alert('Informe pelo menos um `"Status"` para filtrar seus agendamentos!');
       return;
     } else  {
       statusIn = '(' + statusIn + ')';
-    }
+    }    
 
-    console.log(statusIn)
+    console.log({
+      getNumerado,
+      usuario_agend,
+      dataInicio,
+      dataFim,
+      statusIn 
+    });
 
-    // const statusIn = '(0,1)';
-    // const dataIn = 'between ('`2021-07-10`' and `2021-07-10`)';
-
-    const response = await api.get('listaagendamentos', {
+    const response = await api.get('agendamentos', {
       params: {
         getNumerado,
         usuario_agend,
@@ -97,16 +105,11 @@ function ListaAgendamentos() {
         dataFim,
         statusIn 
       }
-    })
+    });
 
-    console.log(response.data);
-    
+    console.log(response.data);   
+    setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
   }
-
-  // function handleChangeStatusAguardando(e: React.ChangeEvent<HTMLInputElement>) {
-  //   let data = e.target.value;
-  //   setStatusAguardando(data);
-  // } 
 
   return (
     <div>
@@ -148,84 +151,52 @@ function ListaAgendamentos() {
               /> 
             </div>
             <div>
-              {/* <CheckStatus />   */}
-
               <FormControl component="fieldset">
                 <FormLabel component="legend" >Status Desejado</FormLabel>
                 <FormGroup aria-label="position" row>
 
                   <FormControlLabel
+                    id="status_Aguardando"
                     name="status_Aguardando"
-                    control={<Checkbox color="primary" />}
+                    control={<Checkbox 
+                                checked={status.Aguardando} 
+                                color="primary" 
+                                onChange={handleChange} 
+                                name="Aguardando"
+                            />}
                     label="Aguardando"
-                    labelPlacement="end"                   
-                    value={statusAguardando} 
-                    // onChange={ (e) => {setDataFim(e.target.value)} }
+                    labelPlacement="end" 
                   />
 
                   <FormControlLabel
-                    value="1"
-                    control={<Checkbox color="primary" />}
+                    id="status_Confirmado"
+                    name="status_Confirmado"
+                    control={<Checkbox 
+                                checked={status.Confirmado} 
+                                color="primary" 
+                                onChange={handleChange} 
+                                name="Confirmado"
+                            />}
                     label="Confirmado"
-                    labelPlacement="end"
+                    labelPlacement="end" 
                   />
 
                   <FormControlLabel
-                    value="2"
-                    control={<Checkbox color="primary" />}
+                    id="status_Realizado"
+                    name="status_Realizado"
+                    control={<Checkbox 
+                                checked={status.Realizado} 
+                                color="primary" 
+                                onChange={handleChange} 
+                                name="Realizado"
+                                defaultValue="false"
+                            />}
                     label="Realizado"
-                    labelPlacement="end"
+                    labelPlacement="end" 
                   />
                 </FormGroup>
               </FormControl>
             </div>
-            {/* <div className="input-block"> 
-                <br />
-                <ThemeProvider theme={theme}>
-                  <Button type="submit" variant="contained" color="primary" size={"small"} style={{ borderRadius: 50 }} className="botao" >
-                    Filtrar
-                  </Button>
-                </ThemeProvider>
-            </div> */}
-
-            <div>
-              <FormLabel component="legend" >Status Desejado</FormLabel>              
-              <FormControlLabel
-                control={(
-                  <Checkbox defaultChecked />
-                )}
-                label="Aguardando"
-                // onChange={ (e) => {setStatusAguardando(e.target.event)}}
-                // onChange={ (e) => {setStatusAguardando(event.target.checked)}}
-                // onChange={ handleChangeStatusAguardando }
-                // onClick={ (e) => {setStatusAguardando(e.target.checked)}}
-              />
-
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Confirmado"
-              />
-              <FormControlLabel
-                control={(
-                  <Checkbox defaultChecked />
-                )}
-                label="Realizado"
-              />
-            </div>
-
-            {/* <div>
-              <span>
-                <label style="Teste1">
-                  <input
-                    type="checkbox"
-                    defaultChecked={this.state.complete}
-                    ref="complete"
-                    onChange={this.handleChange}
-                  />
-                  {this.props.text}
-                </label>
-              </span>
-            </div>  */}
 
             <div >
               <button id="button-buscar-agendamento" type="submit">
@@ -233,17 +204,11 @@ function ListaAgendamentos() {
               </button>
             </div>
 
-            {/* <div>
-              <Button size="small" className={classes.margin}>
-                Small
-              </Button>
-            </div> */}
-
-          {/* </div> */}
-
-          {/* <div className="container-pesquisa-statusagendamentos">
-              <CheckStatus />
-          </div> */}
+            <main>
+              {agendamentos.map((agendamento: Agendamento) => {
+                return <AgendamentoItem key={agendamento.id_agend} agendamento={agendamento} />;
+              })}
+            </main>
 
         </div>
       </form>

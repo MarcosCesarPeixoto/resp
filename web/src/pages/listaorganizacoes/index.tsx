@@ -13,7 +13,6 @@ import search from '../../assets/images/search.png';
 // import btnVoltar from '../../assets/images/voltar_blue.png';
 // import Rodape from '../../componentes/Rodape';
 
-
 function ListaOrganizacoes ()  { 
 
   const [organizacoes, setOrganizacoes] = useState([]); // Criando uma lista vazia 
@@ -36,7 +35,6 @@ function ListaOrganizacoes ()  {
         subject
       }
     });
-    // console.log(response.data);
     setOrganizacoes(response.data); // obtendo a lista de organizações retornada    
   }
   
@@ -45,20 +43,20 @@ function ListaOrganizacoes ()  {
       <Cabecalho />
 
       <div id="page-lista-organizacoes" className="container-lista-organizacao">
-          <div className="container-pesquisa-organizacao"> 
-            <form id="busca-organizacoes" onSubmit={buscaOrganizacoes}>
-              <input 
-                type="text" 
-                id="txtBusca" 
-                className="txtBusca-organizacao" 
-                placeholder="Informe a empresa ou atendimento desejado..." 
-                value={subject} 
-                onChange={e => { setSubject(e.target.value) }} 
-              />
-              <img src={search} id="btnBusca" className="btnBusca" alt="Buscar"/>
-              <button type="submit">Pesquisar</button>               
-            </form>            
-          </div>
+        <div className="container-pesquisa-organizacao"> 
+          <form id="busca-organizacoes" onSubmit={buscaOrganizacoes}>
+            <input 
+              type="text" 
+              id="txtBusca" 
+              className="txtBusca-organizacao" 
+              placeholder="Informe a empresa ou atendimento desejado..." 
+              value={subject} 
+              onChange={e => { setSubject(e.target.value) }} 
+            />
+            <img src={search} id="btnBusca" className="btnBusca" alt="Buscar"/>
+            <button type="submit">Pesquisar</button>               
+          </form>            
+        </div>
         <main>
           {organizacoes.map((organizacao: Organizacao) => {
             return <OrganizacaoItem key={organizacao.id_org} organizacao={organizacao}  />;
