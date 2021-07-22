@@ -10,7 +10,8 @@
 
 .container-lista-agendamentos {	
   padding: 10px;
-	background: var(--color-cinza-maisclaro);
+	/* background: var(--color-cinza-maisclaro); */
+	background: var(--color-background);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	grid-auto-rows: 50px;

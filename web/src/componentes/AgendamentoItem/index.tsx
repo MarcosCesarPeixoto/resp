@@ -1,13 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-// import ReactDOM from 'react-dom';
-// import TabelaAgendamento from '../../componentes/TabelaAgendamentos';
-
-import { parseISO, isAfter, format } from 'date-fns';
+// import { parseISO, isAfter, format } from 'date-fns';
 
 import './styles.css';
-import Organizacao from "../../pages/organizacao";
+// import Organizacao from "../../pages/organizacao";
 
 export interface Agendamento {
   id_agend: number;
@@ -59,22 +56,29 @@ const AgendamentoItem: React.FC<AgendamentoItemProps> = ({ agendamento }) => {
   var data = new Date(agendamento.data_agend);
   var dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
 
+  // const endereco = {agendamento.endereco_org} + ', ' + {agendamento.numero_org} - {agendamento.complemento_org};
+  const endereco_concatenado = agendamento.endereco_org + ',' + agendamento.numero_org + ' ' + agendamento.complemento_org + ' - ' + agendamento.bairro_org;
+  const descricao_cidade_concatenado = agendamento.descricao_cidade_org + '-' + agendamento.uf_org + ' ' + agendamento.cep_org;
   return (
+
+    
+
     <div className="agendamento-item">
       <header>  
-        {/* <TabelaAgendamento />     */}
         <div>
-          <strong>
-            {dataFormatada} {agendamento.hora_agend} {agendamento.razaosocial_org} 
-          </strong>
-          <div>
-            {agendamento.endereco_org} {agendamento.complemento_org} {agendamento.numero_org} {agendamento.bairro_org}  
-            {agendamento.descricao_cidade_org}-{agendamento.uf_org} {agendamento.cep_org}   
-            {agendamento.telefone_org} {agendamento.celular_org} 
+          <div id="dados-agendamento-item">
+            <div id="data-agendamento">{dataFormatada}</div>
+            <div id="hora-agendamento">{agendamento.hora_agend}</div>
+            <div id="razaosocial-agendamento">{agendamento.razaosocial_org}</div>
+            <div id="telefone-agendamento"> {agendamento.telefone_org} </div>
+            <div id="telefone-agendamento"> {agendamento.celular_org} </div>
           </div>
-          {/* <strong>{agendamento.organizacao_agend}</strong> */}
-          {/* <span>
-          </span> */}
+
+          <div id="endereco-agendamento-item"> 
+            <div>  {endereco_concatenado} </div> 
+            <div> {descricao_cidade_concatenado} </div>
+          </div>
+
         </div>
       </header>
     </div>
