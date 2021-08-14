@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -110,6 +110,27 @@ function ListaAgendamentos() {
     console.log(response.data);   
     setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
   }
+
+  // async function listaforcadaAgendamentos() {
+  //   const response = await api.get('agendamentos', {
+  //     params: {
+  //       getNumerado,
+  //       usuario_agend,
+  //       dataInicio,
+  //       dataFim,
+  //       status 
+  //     }
+  //   });
+
+  //   console.log(response.data);   
+  //   setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
+  // }
+
+
+  // useEffect(() => {
+  //   listaforcadaAgendamentos();
+  //   // { buscarListaAgendamentos }
+  // }, []); 
 
   return (
     <div>

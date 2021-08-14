@@ -9,7 +9,7 @@
 }
 
 .atendimento-item header {
-  color: blueviolet;
+  /* color: blueviolet; */
   padding: 0rem 0rem;
   display: grid;
   grid-auto-flow: column;  
@@ -30,7 +30,8 @@
 }
 
 #atendimento-valor {
-  color: blue;    
+  color: rgb(34, 34, 243);    
+  /* color: rgb(24, 139, 233); */
   text-align: center;
   margin: 35px -10px;
 }

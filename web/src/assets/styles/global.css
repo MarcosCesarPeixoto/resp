@@ -1,7 +1,9 @@
 :root {
 
   /* Colors: */
-  --color-background: #F0F0F7;  
+  /* --color-background: #F0F0F7;   */
+  --color-background: whitesmoke;
+  --color-background-geral: whitesmoke;
   --color-preto: #000000;
   --color-azul: #04546E;
   --color-cinza: #8d8d8d;

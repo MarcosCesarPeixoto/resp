@@ -14,6 +14,8 @@ export default class UserController{
 
     const trx = await db.transaction();
 
+    // let senha_usu_crypt = await bcrypt.hash(senha_usu, 8);
+
     try {
 
       await trx('usuario').insert({

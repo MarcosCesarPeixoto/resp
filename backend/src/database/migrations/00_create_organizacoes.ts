@@ -1,8 +1,7 @@
-import knex from 'knex';
 
 // executa na tabela
-export async function up(knex: knex) {
-  return knex.schema.createTable('organizacoes', table => {
+export async function up(knex: any) {
+  return knex.schema.createTable('organizacoes', (table: { increments: (arg0: string) => { (): any; new(): any; primary: { (): void; new(): any; }; }; string: (arg0: string) => { (): any; new(): any; notNullable: { (): void; new(): any; }; unique: { (): { (): any; new(): any; notNullable: { (): void; new(): any; }; }; new(): any; }; }; integer: (arg0: string) => { (): any; new(): any; notNullable: { (): void; new(): any; }; }; blob: (arg0: string) => { (): any; new(): any; notNullable: { (): void; new(): any; }; }; timestamp: (arg0: string) => { (): any; new(): any; defaultTo: { (arg0: any): void; new(): any; }; }; }) => {
     table.increments('id').primary();
     table.string('razaosocial_org').notNullable();
     table.integer('atividade_org').notNullable();
@@ -30,6 +29,6 @@ export async function up(knex: knex) {
 }
 
 // executa caso ocorra algum erro (rollback)
-export async function down(knex: knex) {
+export async function down(knex: any) {
   return knex.schema.dropTable('organizacoes');
 };

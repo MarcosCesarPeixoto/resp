@@ -40,7 +40,8 @@ export default class AgendamentosController {
 
       // efetuando o commit no banco de dados e enviando o status como resposta
       await trx.commit();
-      return res.status(201).send();
+      // return res.status(201).send();
+      return res.status(201).json(res); // Marcos
 
     } catch(err) {
       await trx.rollback();
@@ -106,8 +107,9 @@ export default class AgendamentosController {
           query.where({ usuario_agend });
         } else if (data_agend) {
           if (data_agend && organizacao_agend) {
+            console.log('aqui');
             query.whereRaw("(organizacao_agend=" + organizacao_agend + ")");
-            query.whereRaw("(data_agend=" + data_agend + ")");
+            query.whereRaw("(data_agend='" + data_agend + "')");
             query.orderBy('organizacao_agend', 'data_agend');
           } else if (data_agend) {
             query.where({ data_agend });
@@ -116,6 +118,8 @@ export default class AgendamentosController {
           query.where({ id_agend });
         }
       }   
+
+      console.log(query.toQuery() );
 
       const results = await query;
       console.log(results);

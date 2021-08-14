@@ -10,6 +10,8 @@ import ListaOrganizacoes from './pages/listaorganizacoes/index'
 import ListaAtendimentos from './pages/listaatendimentos';
 import ListaAgendamentos from './pages/listaagendamentos';
 
+import Login from './pages/login';
+
 function Routes() {
   return (
     <BrowserRouter>
@@ -22,6 +24,8 @@ function Routes() {
       <Route path="/listaorganizacoes" component={ListaOrganizacoes} />
       <Route path="/listaatendimentos" component={ListaAtendimentos} />
       <Route path="/listaagendamentos" component={ListaAgendamentos} />
+
+      <Route path="/login" component={Login} />
 
     </BrowserRouter>
   );

@@ -9,7 +9,6 @@ import api from '../../services/api';
 import '../../assets/styles/global.css';
 import './styles.css';
 import { Button, createMuiTheme, TextField, ThemeProvider } from '@material-ui/core';
-import { abort } from 'process';
 
 const theme = createMuiTheme({
   palette: {
@@ -164,27 +163,10 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
       status_agend,
       observacao_agend,
       agend_anterior_agend
-    // }).then(response => {
-    //   console.log(response.status);
-    //   if (response.status === 201){
-    //     return response.data;
-    //   } 
     }).then(() => {
       alert('Agendamento realizado com sucesso!');
-      // marcos - aqui -redirecionar para a lista de agendamentos do usuario.      
-      // history.push('/listaatendimentos', );
-      // ver aqui: https://qastack.com.br/programming/44121069/how-to-pass-params-with-history-push-link-redirect-in-react-router-v4
-
-      // history.push({
-      //   pathname: '/listaagendamentos',
-      //   state: { params: 
-      //             {organizacao_agend: state.organizacao_atd,
-      //              usuario_agend: usuario_agend,
-      //              status_agend: status_agend
-      //             } 
-      //          }
-      // });
-
+      // console.log(res);
+      // history.push('/listaatendimentos');
     }).catch((error) => { 
       if (error.response){
         alert('Erro ao tentar realizar agendamento: ResponseError = ' + error.response);
