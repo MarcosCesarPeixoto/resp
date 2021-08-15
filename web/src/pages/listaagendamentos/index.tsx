@@ -7,7 +7,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 import Cabecalho from "../../componentes/Cabecalho";
-// import CheckStatus from "../../componentes/CheckStatus";
 
 import AgendamentoItem, { Agendamento } from '../../componentes/AgendamentoItem';
 
@@ -89,14 +88,6 @@ function ListaAgendamentos() {
       statusIn = '(' + statusIn + ')';
     }    
 
-    console.log({
-      getNumerado,
-      usuario_agend,
-      dataInicio,
-      dataFim,
-      statusIn 
-    });
-
     const response = await api.get('agendamentos', {
       params: {
         getNumerado,
@@ -107,30 +98,8 @@ function ListaAgendamentos() {
       }
     });
 
-    console.log(response.data);   
     setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
   }
-
-  // async function listaforcadaAgendamentos() {
-  //   const response = await api.get('agendamentos', {
-  //     params: {
-  //       getNumerado,
-  //       usuario_agend,
-  //       dataInicio,
-  //       dataFim,
-  //       status 
-  //     }
-  //   });
-
-  //   console.log(response.data);   
-  //   setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
-  // }
-
-
-  // useEffect(() => {
-  //   listaforcadaAgendamentos();
-  //   // { buscarListaAgendamentos }
-  // }, []); 
 
   return (
     <div>
@@ -140,8 +109,7 @@ function ListaAgendamentos() {
         <Titulo titulo="Lista de Agendamentos" />;
 
         <div id="page-lista-agendamentos" className="container-lista-agendamentos">
-          {/* <div className="container-pesquisa-dataagendamentos"> */}
-
+          
             <div className="input-block">
               <TextField
                 id="data_inicio"
@@ -176,61 +144,60 @@ function ListaAgendamentos() {
                 <FormLabel component="legend" >Status Desejado</FormLabel>
                 <FormGroup aria-label="position" row>
 
-                  <FormControlLabel
-                    id="status_Aguardando"
-                    name="status_Aguardando"
-                    control={<Checkbox 
-                                checked={status.Aguardando} 
-                                color="primary" 
-                                onChange={handleChange} 
-                                name="Aguardando"
-                            />}
-                    label="Aguardando"
-                    labelPlacement="end" 
-                  />
+                <FormControlLabel
+                  id="status_Aguardando"
+                  name="status_Aguardando"
+                  control={<Checkbox 
+                              checked={status.Aguardando} 
+                              color="primary" 
+                              onChange={handleChange} 
+                              name="Aguardando"
+                          />}
+                  label="Aguardando"
+                  labelPlacement="end" 
+                />
 
-                  <FormControlLabel
-                    id="status_Confirmado"
-                    name="status_Confirmado"
-                    control={<Checkbox 
-                                checked={status.Confirmado} 
-                                color="primary" 
-                                onChange={handleChange} 
-                                name="Confirmado"
-                            />}
-                    label="Confirmado"
-                    labelPlacement="end" 
-                  />
+                <FormControlLabel
+                  id="status_Confirmado"
+                  name="status_Confirmado"
+                  control={<Checkbox 
+                              checked={status.Confirmado} 
+                              color="primary" 
+                              onChange={handleChange} 
+                              name="Confirmado"
+                          />}
+                  label="Confirmado"
+                  labelPlacement="end" 
+                />
 
-                  <FormControlLabel
-                    id="status_Realizado"
-                    name="status_Realizado"
-                    control={<Checkbox 
-                                checked={status.Realizado} 
-                                color="primary" 
-                                onChange={handleChange} 
-                                name="Realizado"
-                                defaultValue="false"
-                            />}
-                    label="Realizado"
-                    labelPlacement="end" 
-                  />
-                </FormGroup>
-              </FormControl>
-            </div>
+                <FormControlLabel
+                  id="status_Realizado"
+                  name="status_Realizado"
+                  control={<Checkbox 
+                              checked={status.Realizado} 
+                              color="primary" 
+                              onChange={handleChange} 
+                              name="Realizado"
+                              defaultValue="false"
+                          />}
+                  label="Realizado"
+                  labelPlacement="end" 
+                />
+              </FormGroup>
+            </FormControl>
+          </div>
 
-            <div >
-              <button id="button-buscar-agendamento" type="submit">
-                BUSCAR
-              </button>
-            </div>
+          <div >
+            <button id="button-buscar-agendamento" type="submit">
+              BUSCAR
+            </button>
+          </div>
 
-            <main>
-              {agendamentos.map((agendamento: Agendamento) => {
-                return <AgendamentoItem key={agendamento.id_agend} agendamento={agendamento} />;
-              })}
-            </main>
-
+          <main>
+            {agendamentos.map((agendamento: Agendamento) => {
+              return <AgendamentoItem key={agendamento.id_agend} agendamento={agendamento} />;
+            })}
+          </main>
         </div>
       </form>
     </div>

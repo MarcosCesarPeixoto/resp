@@ -39,7 +39,7 @@ function Cabecalho() {
             <li><a href="url">Principal</a></li>
             <li><a href="url#">Meu Cadastro</a></li>
             <li><a href="url">Contato</a></li>
-            <li><a href="url">Entrar</a></li>
+            <li><a href="/login">Entrar</a></li>
         </ul>
       </nav>
     </div>

@@ -3,6 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cabecalho from '../../componentes/Cabecalho';
 import Titulo from '../../componentes/Titulo';
+import api from "../../services/api";
 
 import './styles.css';
 
@@ -28,7 +29,7 @@ function Login () {
   const [email_usu, setEmailUsuario] = useState('');
   const [senha_usu, setSenhaUsuario] = useState('');
 
-  function handleLogin(e: FormEvent ) {
+  async function handleLogin(e: FormEvent ) {
     e.preventDefault(); 
 
     if (!email_usu){
@@ -41,22 +42,18 @@ function Login () {
       return;
     }
 
-    // api.post('usuarios', {
-    //   nome_usu,
-    //   email_usu,
-    //   senha_usu
-    // }).then(() => {
-    //   alert('Cadastro de Usuário realizado com sucesso!');
-    //   history.push('/listaorganizacoes');
-    // }).catch((error) => { 
-    //   if (error.response){
-    //     alert('Erro no cadastro de usuário: ResponseError = ' + error.response);
-    //   } else if(error.request){
-    //     alert('Erro no cadastro de usuário: RequestError = ' + error.response.request._response);
-    //   }else if(error.message){
-    //     alert('Erro no cadastro de usuário: MessageError = ' + error.message);
-    //   }
-    // });
+    try{
+      const response = await api.get('login', {
+        params: {
+          email_usu,
+          senha_usu
+        }
+      });
+
+      console.log(response.data.nome_usu);
+    }catch{
+      alert('Usuário ou senha inválido!'); 
+    }  
   }
 
   return (
@@ -66,53 +63,48 @@ function Login () {
       <Titulo titulo="Faça seu login" />; 
 
       <form onSubmit={handleLogin}>
-          {/* <fieldset className="container-form"> */} 
+        <div className="input-block">
+          <TextField 
+            id="email_usu" 
+            label="E-mail" 
+            type="text" 
+            fullWidth
+            value={email_usu} 
+            onChange={(e) => { setEmailUsuario(e.target.value) }}
+          />
+        </div>
 
-            <div className="input-block">
-              <TextField 
-                id="email_usu" 
-                label="E-mail" 
-                type="text" 
-                fullWidth
-                value={email_usu} 
-                onChange={(e) => { setEmailUsuario(e.target.value) }}
-              />
-            </div>
+        <div className="input-block">
+          <TextField 
+            id="senha_usu" 
+            label="Senha" 
+            type="password" 
+            fullWidth
+            value={senha_usu} 
+            onChange={(e) => { setSenhaUsuario(e.target.value) }}
+          />
+        </div>  
 
-            <div className="input-block">
-              <TextField 
-                id="senha_usu" 
-                label="Senha" 
-                type="password" 
-                fullWidth
-                value={senha_usu} 
-                onChange={(e) => { setSenhaUsuario(e.target.value) }}
-              />
-            </div>  
+        <div className="input-block">
+          <br></br>
+          
+          <div className="helplogin-container">
+            <Link to="/">Esqueci minha senha</Link>
+          </div>
 
-            <div className="input-block">
-              <br></br>
-              
-              <div className="helplogin-container">
-                <Link to="/">Esqueci minha senha</Link>
-              </div>
+          <ThemeProvider theme={theme}>
+            <Button type="submit" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" >
+              Login
+            </Button>
+          </ThemeProvider>
 
-              <ThemeProvider theme={theme}>
-                <Button type="submit" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" >
-                  Login
-                </Button>
-              </ThemeProvider>
-
-              <div className="helplogin-container">
-                Não tem uma conta?
-                <br></br>
-                <Link to="/cadastrousuario">Cadastre-se</Link>
-              </div>  
-            </div>
-
-          {/* </fieldset> */}
-        </form>
-
+          <div className="helplogin-container">
+            Não tem uma conta?
+            <br></br>
+            <Link to="/cadastrousuario">Cadastre-se</Link>
+          </div>  
+        </div>
+      </form>
     </div> 
   )
 
