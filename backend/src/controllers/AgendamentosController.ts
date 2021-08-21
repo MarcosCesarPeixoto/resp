@@ -7,7 +7,7 @@ export default class AgendamentosController {
   // Método POST
   async create(req: Request, res: Response, next: NextFunction) {
 
-    console.log(req);
+    // console.log(req);
 
     // Pegando o conteúdo passado no req
     const {      
@@ -26,7 +26,7 @@ export default class AgendamentosController {
     const trx = await db.transaction();
 
     try {
-      await trx('agendamento').insert({
+      const result = await trx('agendamento').insert({
         usuario_agend,
         organizacao_agend,
         atendimento_agend,
@@ -40,8 +40,14 @@ export default class AgendamentosController {
 
       // efetuando o commit no banco de dados e enviando o status como resposta
       await trx.commit();
-      // return res.status(201).send();
-      return res.status(201).json(res); // Marcos
+      // const result = await trx.commit();
+      return res.status(201).send();
+      // console.log(result);
+      // console.log(response);
+
+      // return res.status(201).json(); 
+      // return res.status(201).json(res); // Marcos
+      // return res.status(201).json({teste: "TESTE", teste2: 123}); // Marcos
 
     } catch(err) {
       await trx.rollback();
@@ -54,7 +60,7 @@ export default class AgendamentosController {
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
     try { 
-      console.log(req.query);
+      // console.log(req.query);
 
       // var getNumerado = req.query.getNumerado;
       // var statusIn    = req.query.statusIn;

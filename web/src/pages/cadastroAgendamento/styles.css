@@ -1,5 +1,4 @@
 .container-cadastroagendamento {
-  /* padding: 1.4rem 1rem; */
   background: whitesmoke;	
   width: 754px; 
   height: 100%;
@@ -7,8 +6,7 @@
 
 .horario-container {  
   padding: 10px;
-  background: var(--color-cinza-maisclaro);
-  /* background: var(--color-background); */
+  background: var(--color-cinza-maisclaro);  
   border: 1px solid var(--color-cinza);  
   border-radius: 1rem;
   margin-top: 1rem;

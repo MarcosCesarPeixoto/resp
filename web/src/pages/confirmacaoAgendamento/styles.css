@@ -1,0 +1,43 @@
+.container-confirmacaoagendamento {
+  text-align: center;  
+}
+
+.imgSucessoAgendamento {
+  padding-top: 2em;  
+  width: 7em;
+}
+
+.mensagem-confirmacaoagendamento {
+  padding-top: 1em;  
+  text-align: center; 
+  font-weight: bold; 
+  font-size: large;
+  color: var(--color-azul);  
+}
+
+.datahora-confirmacaoagendamento {
+  padding-top: 1em;
+  color: var(--color-azul);  
+}
+
+.data-confirmacaoagendamento {
+  padding: 10px;
+}
+
+.txt-confirmacaoagendamento {
+  padding-top: 15px;
+}
+
+.txt-confirmacaoagendamento div{
+  padding-top: 5px;
+}
+
+.texton-confirmacaoagendamento {
+  color: var(--color-azul);
+}
+
+.txt8-confirmacaoagendamento {
+  font-size: small;
+}
+
+

@@ -36,7 +36,7 @@ function Cabecalho() {
       <nav id="menu-h" className="container-menu">
         <ul>
             <li><Link to="/listaagendamentos">Meus Agendamentos</Link></li>
-            <li><a href="url">Principal</a></li>
+            <li><Link to="/listaorganizacoes">Buscar Atendimentos</Link></li>
             <li><a href="url#">Meu Cadastro</a></li>
             <li><a href="url">Contato</a></li>
             <li><a href="/login">Entrar</a></li>

@@ -6,6 +6,8 @@ import Organizacao from './pages/organizacao'
 import CadastroUsuario from './pages/cadastroUsuario'
 import CadastroAgendamento from './pages/cadastroAgendamento';
 
+import ConfirmacaoAgendamento from './pages/confirmacaoAgendamento';
+
 import ListaOrganizacoes from './pages/listaorganizacoes/index'
 import ListaAtendimentos from './pages/listaatendimentos';
 import ListaAgendamentos from './pages/listaagendamentos';
@@ -20,6 +22,8 @@ function Routes() {
       <Route path="/organizacao" component={Organizacao} />
       <Route path="/cadastrousuario" component={CadastroUsuario} />
       <Route path="/cadastroagendamento" component={CadastroAgendamento} />
+
+      <Route path="/confirmacaoagendamento" component={ConfirmacaoAgendamento} />
 
       <Route path="/listaorganizacoes" component={ListaOrganizacoes} />
       <Route path="/listaatendimentos" component={ListaAtendimentos} />

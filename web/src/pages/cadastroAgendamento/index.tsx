@@ -163,10 +163,21 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
       status_agend,
       observacao_agend,
       agend_anterior_agend
-    }).then(() => {
-      alert('Agendamento realizado com sucesso!');
+    }).then(() => {     
+      alert('Agendamento realizado com sucesso!');  
       // console.log(res);
-      // history.push('/listaatendimentos');
+
+      history.push({
+        pathname: '/confirmacaoagendamento/',
+        state: { 
+          id: '12345',
+          descricao_org: "Bela Fashion",
+          descricao_atd: descricao_atd,
+          data_agend: data_agend,
+          hora_agend: hora_agend,
+        }
+      });
+
     }).catch((error) => { 
       if (error.response){
         alert('Erro ao tentar realizar agendamento: ResponseError = ' + error.response);

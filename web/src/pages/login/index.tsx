@@ -7,6 +7,8 @@ import api from "../../services/api";
 
 import './styles.css';
 
+require('dotenv').config();
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -28,6 +30,11 @@ function Login () {
 
   const [email_usu, setEmailUsuario] = useState('');
   const [senha_usu, setSenhaUsuario] = useState('');
+
+  // const [status, setStatus = useState({
+  //   type: '',
+  //   mensagem: ''
+  // })];
 
   async function handleLogin(e: FormEvent ) {
     e.preventDefault(); 
@@ -51,9 +58,30 @@ function Login () {
       });
 
       console.log(response.data.nome_usu);
+      localStorage.setItem('ID_USUARIO', response.data.id_usuario);
+      localStorage.setItem('NOME_USUARIO', response.data.nome_usuario);
     }catch{
       alert('Usuário ou senha inválido!'); 
     }  
+
+    // await api.get('login', {
+    //   params: {
+    //     email_usu,
+    //     senha_usu
+    // }}).catch((err) => {
+    //   if(err.response){
+    //     setStatus({
+    //       type: 'error',
+    //       mensagem: err.response.data.mensagem
+    //     });
+    //   }else{
+    //     setStatus({
+    //       type:'error',
+    //       mensagem: 'Erro: Tente mais tarde!'
+    //     });
+    //   }
+    // })
+
   }
 
   return (
