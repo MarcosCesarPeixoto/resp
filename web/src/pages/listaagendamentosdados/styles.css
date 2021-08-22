@@ -1,20 +1,16 @@
-.container-lista-agendamentos {	
-  padding: 20px;
+
+.container-lista-agendamentos {	  
 	background: var(--color-background);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	grid-auto-rows: 50px;
 	grid-gap: 2rem;
 	height: 95%;
-	width: 754px;  
+	width: 754px;  	
 	text-align: center;
 } 
 
-.button-buscar-agendamento {
-	text-align: center;
-}
-
-#button-buscar-agendamento {
+#button-voltar-agendamento {
 	width: 100px;
 	height: 2rem;
 	background: var(--primary-main);
@@ -28,9 +24,9 @@
 	justify-content: center;
 	text-decoration: none;
 	transition: var(--primary-dark) 0.2s;
-	margin-top: 1.5rem;
+	margin-top: 0rem;	
 } 
 
-#button-buscar-agendamento:hover {
+#button-voltar-agendamento:hover {
 	background-color: var(--primary-dark);	
 }

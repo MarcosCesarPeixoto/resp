@@ -2,7 +2,6 @@ import { Button, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 
 import Cabecalho from '../../componentes/Cabecalho';
-import Titulo from '../../componentes/Titulo';
 
 import './styles.css';
 

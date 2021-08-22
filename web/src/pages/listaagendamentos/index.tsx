@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -45,9 +46,8 @@ const useStyles = makeStyles((theme2: Theme) =>
 );
 
 function ListaAgendamentos() {
-  // const classes = useStyles();
   const [agendamentos, setAgendamentos] = useState([]); // Criando uma lista vazia de agendamentos
-
+  
   const [getNumerado] = useState(1); 
   const [usuario_agend, setUsuarioAgend] = useState(1);
   const [dataInicio, setDataInicio] = useState('');
@@ -99,6 +99,19 @@ function ListaAgendamentos() {
     });
 
     setAgendamentos(response.data); // obtendo a lista de agendamentos retornada 
+
+    // Redirecionar para outro formulário para apresentar os dados
+    history.push({
+      pathname: '/listaagendamentosdados/',
+      state: response.data
+    });
+
+  }
+
+  const location = useLocation();
+  const history = useHistory();
+  function goBack(){
+      history.goBack();
   }
 
   return (
@@ -109,41 +122,42 @@ function ListaAgendamentos() {
         <Titulo titulo="Lista de Agendamentos" />;
 
         <div id="page-lista-agendamentos" className="container-lista-agendamentos">
-          
-            <div className="input-block">
-              <TextField
-                id="data_inicio"
-                name="data_inicio"
-                label="Data Inicial"
-                type="date"
-                defaultValue="checked"
-                value={dataInicio} 
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={ (e) => {setDataInicio(e.target.value)}}
-              /> 
-            </div>
+          <div className="input-block">
+            <TextField
+              id="data_inicio"
+              name="data_inicio"
+              label="Data Inicial"
+              type="date"
+              defaultValue="checked"
+              value={dataInicio} 
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={ (e) => {setDataInicio(e.target.value)}}
+            /> 
+          </div>
 
-            <div className="input-block">
-              <TextField
-                id="data_final"
-                name="data_final"
-                label="Data Final"
-                type="date"
-                defaultValue=""
-                value={dataFim} 
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={ (e) => {setDataFim(e.target.value)} }
-              /> 
-            </div>
-            <div>
-              <FormControl component="fieldset">
-                <FormLabel component="legend" >Status Desejado</FormLabel>
-                <FormGroup aria-label="position" row>
+          <div className="input-block">
+            <TextField
+              id="data_final"
+              name="data_final"
+              label="Data Final"
+              type="date"
+              defaultValue=""
+              value={dataFim} 
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={ (e) => {setDataFim(e.target.value)} }
+            /> 
+          </div>
 
+          <div>
+            <FormControl component="fieldset">
+              <FormLabel component="legend" >
+                Status Desejado
+              </FormLabel>
+              <FormGroup aria-label="position" row>
                 <FormControlLabel
                   id="status_Aguardando"
                   name="status_Aguardando"
@@ -192,13 +206,15 @@ function ListaAgendamentos() {
               BUSCAR
             </button>
           </div>
-
-          <main>
-            {agendamentos.map((agendamento: Agendamento) => {
-              return <AgendamentoItem key={agendamento.id_agend} agendamento={agendamento} />;
-            })}
-          </main>
+          {/* // fim */}
         </div>
+
+        {/* <div className="button-buscar-agendamento">
+          <button id="button-buscar-agendamento" type="submit">
+            BUSCAR
+          </button>
+        </div> */}
+
       </form>
     </div>
 
@@ -206,3 +222,28 @@ function ListaAgendamentos() {
 }
 
 export default ListaAgendamentos;
+
+
+// switch (agendamento.status_agend) {
+//   case 0:
+//     descricao_status = 'Aguarde';
+//       break;
+//   case 1:
+//     descricao_status = 'Confirmado';
+//     break;
+//   case 2:
+//     descricao_status = 'Recusado';
+//     break;
+//   case 3:
+//     descricao_status = 'Cancelado';
+//     break;
+//   case 4:
+//     descricao_status = 'Em Andamento';
+//     break;
+//   case 5:
+//     descricao_status = 'Realizado';
+//     break;
+//   case 6:
+//     descricao_status = 'Novo Agendamento';
+//     break;
+// } 

@@ -34,6 +34,9 @@ export interface Agendamento {
   celular_org: string;
   logomarca_org: string;
 
+  id_atd: number;
+  descricao_atd: string;
+  valor_atd: number;
 }
 
 interface AgendamentoItemProps {
@@ -43,26 +46,40 @@ interface AgendamentoItemProps {
 const AgendamentoItem: React.FC<AgendamentoItemProps> = ({ agendamento }) => {
 
   const history = useHistory();
-
-  // var dataagend = new Date({agendamento.data_agend)
-  // let dataagend = ({agendamento.data_agend}).getDate() ;
-  // const date = '2018-04-01';
-  // const date = agendamento.data_agend.toString;
-  // const date = new Date(‘2019/01/01’);
-  // const dataformatada = format(date, 'MM/DD/YYYY');
-  // const parsedDate = parseISO(date);
-  // const past = isAfter(parsedDate, new Date()); // true
-  
+ 
   var data = new Date(agendamento.data_agend);
   var dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
 
   // const endereco = {agendamento.endereco_org} + ', ' + {agendamento.numero_org} - {agendamento.complemento_org};
   const endereco_concatenado = agendamento.endereco_org + ',' + agendamento.numero_org + ' ' + agendamento.complemento_org + ' - ' + agendamento.bairro_org;
   const descricao_cidade_concatenado = agendamento.descricao_cidade_org + '-' + agendamento.uf_org + ' ' + agendamento.cep_org;
+
+  let descricao_status;
+  switch (agendamento.status_agend) {
+    case 0:
+      descricao_status = 'Aguarde';
+        break;
+    case 1:
+      descricao_status = 'Confirmado';
+      break;
+    case 2:
+      descricao_status = 'Recusado';
+      break;
+    case 3:
+      descricao_status = 'Cancelado';
+      break;
+    case 4:
+      descricao_status = 'Em Andamento';
+      break;
+    case 5:
+      descricao_status = 'Realizado';
+      break;
+    case 6:
+      descricao_status = 'Novo Agendamento';
+      break;
+  }  
+
   return (
-
-    
-
     <div className="agendamento-item">
       <header>  
         <div>
@@ -72,7 +89,16 @@ const AgendamentoItem: React.FC<AgendamentoItemProps> = ({ agendamento }) => {
             <div id="razaosocial-agendamento">{agendamento.razaosocial_org}</div>
             <div id="telefone-agendamento"> {agendamento.telefone_org} </div>
             <div id="telefone-agendamento"> {agendamento.celular_org} </div>
-          </div>
+            <div id="status"> Status: {descricao_status} </div>                      
+            {/* <div > descrocao do atendimento {descricao_atd} </div> */}
+            {/* <div > descrocao do atendimento </div> */}
+          </div>  
+
+          {/* <div id="telefones-agendamento-item"> */}
+            {/* <div id="status"> Status: {descricao_status} </div>           */}
+            {/* <div id="telefone-agendamento"> {agendamento.telefone_org} </div>  */}
+            {/* <div id="telefone-agendamento"> {agendamento.celular_org} </div> */}
+          {/* </div> */}
 
           <div id="endereco-agendamento-item"> 
             <div>  {endereco_concatenado} </div> 

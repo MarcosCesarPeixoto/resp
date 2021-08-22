@@ -31,10 +31,6 @@ const AtendimentoItem: React.FC<AtendimentoItemProps> = ({ atendimento }) => {
   const history = useHistory();
 
   const redirectCadastroAgendamento = () => {
-    //console.log('redirect');
-    //history.push('/cadastroagendamento');
-    // console.log(atendimento.descricao_atd);
-
     history.push({
       pathname: '/cadastroagendamento',
       state: {
@@ -70,7 +66,6 @@ const AtendimentoItem: React.FC<AtendimentoItemProps> = ({ atendimento }) => {
         </div>
 
         <div id="atendimento-valor">
-          {/* <strong>R$ {atendimento.valor_atd}</strong> */}
           {ExibirValor && <strong>R$ {atendimento.valor_atd}</strong>}
         </div>
 
