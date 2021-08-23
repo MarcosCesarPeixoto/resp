@@ -208,13 +208,6 @@ function ListaAgendamentos() {
           </div>
           {/* // fim */}
         </div>
-
-        {/* <div className="button-buscar-agendamento">
-          <button id="button-buscar-agendamento" type="submit">
-            BUSCAR
-          </button>
-        </div> */}
-
       </form>
     </div>
 

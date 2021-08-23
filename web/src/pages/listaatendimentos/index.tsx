@@ -26,7 +26,7 @@ export interface Organizacao {
 
 const ListaAtendimentos: React.FC = () => {
   const titulo = "Selecione o atendimento desejado"; 
-  const { state }  = useLocation<Organizacao>();
+  const { state }  = useLocation<Organizacao>();  
   const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia 
 
   async function buscaAtendimentos() {
@@ -50,7 +50,7 @@ const ListaAtendimentos: React.FC = () => {
       <form id="lista-atendimentos" >
         <main>        
           {atendimentos.map((atendimento: Atendimento) => {
-            return <AtendimentoItem key={atendimento.id_atd} atendimento={atendimento}  />;
+            return <AtendimentoItem key={atendimento.id_atd} atendimento={atendimento} />;
           })}
         </main>
       </form>

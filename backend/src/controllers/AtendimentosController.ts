@@ -61,12 +61,26 @@ export default class AtendimentosController {
       var id_atd = req.query.id_atd;
       var organizacao_atd = req.query.organizacao_atd;
       
-      const query = db('atendimento');
+      let query = null;
       if (id_atd) {
-        query.where({ id_atd });
+        query = await db.select('atendimento.*', 'organizacao.*')
+          .from('atendimento')
+          .leftOuterJoin('organizacao', 'organizacao.id_org', 'atendimento.organizacao_atd')
+          .where({ id_atd });
       } else if (organizacao_atd) {
-        query.where({ organizacao_atd });
+        query = await db.select('atendimento.*', 'organizacao.*')
+          .from('atendimento')
+          .leftOuterJoin('organizacao', 'organizacao.id_org', 'atendimento.organizacao_atd')
+          .where({ organizacao_atd });
       }
+
+      // Marcos - forma anterior
+      // const query = db('atendimento');
+      // if (id_atd) {
+      //   query.where({ id_atd });
+      // } else if (organizacao_atd) {
+      //   query.where({ organizacao_atd });
+      // }
 
       const results = await query;
       return res.json(results);

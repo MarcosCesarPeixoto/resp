@@ -12,22 +12,12 @@ export default class OrganizacoesController{
       let organizacoes = null;
       if (conteudo_busca) {
         // buscar pelo conteúdo informado
-
-        // organizacoes = await db('organizacao')
-          // .leftOuterJoin('organizacao_tag', 'organizacao.id_org', 'organizacao_tag.id_org')
-          // .leftOuterJoin('tag', 'tag.id_tag', 'organizacao_tag.id_tag')
-          // .whereRaw("(razaosocial_org like '%" + conteudo_busca + "%') or (tag like '%" + conteudo_busca + "%')")
-          // .groupBy('organizacao_tag.id_org');
-
-          //--
-
-          organizacoes = await db.select('organizacao.*', 'tag.*')
-            .from('organizacao')
-            .leftOuterJoin('organizacao_tag', 'organizacao.id_org', 'organizacao_tag.id_org')
-            .leftOuterJoin('tag', 'tag.id_tag', 'organizacao_tag.id_tag')
-            .whereRaw("(organizacao.razaosocial_org like '%" + conteudo_busca + "%') or (tag like '%" + conteudo_busca + "%')")
-            .groupBy('organizacao.id_org');
-
+        organizacoes = await db.select('organizacao.*', 'tag.*')
+          .from('organizacao')
+          .leftOuterJoin('organizacao_tag', 'organizacao.id_org', 'organizacao_tag.id_org')
+          .leftOuterJoin('tag', 'tag.id_tag', 'organizacao_tag.id_tag')
+          .whereRaw("(organizacao.razaosocial_org like '%" + conteudo_busca + "%') or (tag like '%" + conteudo_busca + "%')")
+          .groupBy('organizacao.id_org');
       } else {
         // busca tudo
          organizacoes = await db('organizacao');

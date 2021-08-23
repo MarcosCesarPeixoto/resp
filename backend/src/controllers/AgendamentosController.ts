@@ -38,16 +38,12 @@ export default class AgendamentosController {
         agend_anterior_agend
         });
 
+      // console.log(result); // Marcos
+
       // efetuando o commit no banco de dados e enviando o status como resposta
       await trx.commit();
       // const result = await trx.commit();
-      return res.status(201).send();
-      // console.log(result);
-      // console.log(response);
-
-      // return res.status(201).json(); 
-      // return res.status(201).json(res); // Marcos
-      // return res.status(201).json({teste: "TESTE", teste2: 123}); // Marcos
+      return res.status(201).send({id: result, descricao: "Agendamento criado"});
 
     } catch(err) {
       await trx.rollback();
@@ -60,13 +56,6 @@ export default class AgendamentosController {
   // Método GET
   async index(req: Request, res: Response, next: NextFunction) {
     try { 
-      // console.log(req.query);
-
-      // var getNumerado = req.query.getNumerado;
-      // var statusIn    = req.query.statusIn;
-      // var dataInicio  = req.query.dataInicio;
-      // var dataFim     = req.query.dataFim;
-
       const { getNumerado } = req.query;
       const { statusIn } = req.query;
       const { dataInicio } = req.query;

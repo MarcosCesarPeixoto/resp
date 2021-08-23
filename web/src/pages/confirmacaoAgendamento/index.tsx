@@ -59,7 +59,7 @@ const ConfirmacaoAgendamento = (props: any) => {
         <img className="imgSucessoAgendamento" src={imgSucessoAgendamento} alt="Sucesso Agendamento"/>
         <div className="mensagem-confirmacaoagendamento">Agendamento efetuado com sucesso!</div>
 
-        <div className="txt8-confirmacaoagendamento">Protocolo do Agendamento {id}</div>
+        <div className="txt8-confirmacaoagendamento">Protocolo do Agendamento: {id}</div>
 
         <div className="txt-confirmacaoagendamento">
           <div>Local: {descricao_org}</div>

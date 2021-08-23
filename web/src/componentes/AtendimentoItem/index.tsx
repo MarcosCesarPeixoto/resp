@@ -16,8 +16,9 @@ export interface Atendimento {
   horario_padrao_inicio_atd: number;
   horario_padrao_fim_atd: number;
   imagem_atd: string;
-  organizacao_atd: number;
+  organizacao_atd: number;  
   ativo_atd: number;
+  razaosocial_org: string;  // Marcos
 }
 
 interface AtendimentoItemProps {
@@ -47,7 +48,8 @@ const AtendimentoItem: React.FC<AtendimentoItemProps> = ({ atendimento }) => {
         horario_padrao_fim_atd: atendimento.horario_padrao_fim_atd,
         imagem_atd: atendimento.imagem_atd,
         organizacao_atd: atendimento.organizacao_atd,
-        ativo_atd: atendimento.ativo_atd
+        ativo_atd: atendimento.ativo_atd,
+        razaosocial_org: atendimento.razaosocial_org  // Marcos
       }
     });
    }
@@ -56,10 +58,7 @@ const AtendimentoItem: React.FC<AtendimentoItemProps> = ({ atendimento }) => {
 
     <div className="atendimento-item" onClick={redirectCadastroAgendamento}>
       <header>
-        {/* <div className="atendimento-item" onClick={redirectAgendamento}> */}
-
-        {/* {ExibirLImgAtendimento && <img src={atendimento.imagem_atd} alt={atendimento.descricao_atd}/>} */}
-        <img src={atendimento.imagem_atd} alt={atendimento.descricao_atd}/>         
+        <img src={atendimento.imagem_atd} alt={atendimento.descricao_atd}/>  
         <div id="atendimento-descricao">
           <strong>{atendimento.descricao_atd}</strong><br></br>
           <span id="atendimento-descricao-detalhada">{atendimento.descricao_detalhada_atd}</span>
