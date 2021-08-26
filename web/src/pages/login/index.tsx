@@ -57,9 +57,14 @@ function Login () {
         }
       });
 
-      console.log(response.data.nome_usu);
-      localStorage.setItem('ID_USUARIO', response.data.id_usuario);
-      localStorage.setItem('NOME_USUARIO', response.data.nome_usuario);
+      const nome_usu  = response.data.nome_usu;
+      const id_usu    = response.data.id_usu;
+            
+      localStorage.setItem('@resp/nomeusuario', nome_usu);
+      localStorage.setItem('@resp/idusuario', id_usu);
+      localStorage.setItem('@resp/emailusuario', email_usu);
+
+      window.location.reload();
     }catch{
       alert('Usuário ou senha inválido!'); 
     }  
@@ -81,12 +86,45 @@ function Login () {
     //     });
     //   }
     // })
-
   }
+
+  async function handleLogout(e: FormEvent ) {
+
+    if(estaLogado){
+      localStorage.removeItem('@resp/nomeusuario');
+      localStorage.removeItem('@resp/idusuario');
+      localStorage.removeItem('@resp/emailusuario');
+      window.location.reload();
+    }
+  }
+
+  const estaLogado = (localStorage.getItem('@resp/nomeusuario') !== null);
+
+  if(estaLogado){
+    return (
+      <div id="login" className="container-logout"> 
+        <Cabecalho />
+        <br></br>    
+        <br></br>    
+        <Titulo titulo="Deseja mesmo fazer logout?" />; 
+
+        <form className="formulario-logout" onSubmit={handleLogout}>
+          <div className="input-block">
+            <br></br>          
+            <ThemeProvider theme={theme}>
+                <Button type="submit" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" >
+                  Logout
+                </Button>
+            </ThemeProvider>
+          </div>  
+        </form>
+      </div> 
+    )  
+  } 
 
   return (
     <div id="login" className="container-login">
-
+      
       <Cabecalho />  
       <Titulo titulo="Faça seu login" />; 
 
@@ -132,9 +170,10 @@ function Login () {
             <Link to="/cadastrousuario">Cadastre-se</Link>
           </div>  
         </div>
-      </form>
+      </form> 
+      
     </div> 
-  )
+  )  
 
 };
 

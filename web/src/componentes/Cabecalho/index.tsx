@@ -5,6 +5,27 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 
 function Cabecalho() {
+ 
+  const nome_usuario = localStorage.getItem('@resp/nomeusuario');
+  const estaLogado = (nome_usuario !== null);
+
+  function NomeUsuario() {
+    return(     
+      estaLogado ?
+      <span>{ nome_usuario }</span>
+      :
+      null
+    );
+  }
+
+  function EntrarSair() {
+    return(
+      estaLogado ?
+      <li><a href="/login"> Sair </a></li>
+      :
+      <li><a href="/login"> Entrar </a></li>
+    );
+  }
 
   return (
 
@@ -21,7 +42,8 @@ function Cabecalho() {
             </div>
 
             <div id="nome_usuario">
-              <span>Carlos Drumond de Andrade</span>
+              <NomeUsuario />
+              {/* <span>Carlos Drumond de Andrade</span> */}
             </div>
             
             <div id="Sair" className="button-sair">
@@ -39,7 +61,9 @@ function Cabecalho() {
             <li><Link to="/listaorganizacoes">Buscar Atendimentos</Link></li>
             <li><a href="url#">Meu Cadastro</a></li>
             <li><a href="url">Contato</a></li>
-            <li><a href="/login">Entrar</a></li>
+            {/* <li><a href="/login">Entrar</a></li> */}
+            {/* <li><a href="/login"> {estaLogado ? Sair : Entrar} </a> */}
+            <EntrarSair /> 
         </ul>
       </nav>
     </div>

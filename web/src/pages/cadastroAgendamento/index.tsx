@@ -190,50 +190,6 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     });
   }
 
-  // function handleIncluirAgendamento(e: FormEvent ) {
-  //   e.preventDefault(); // evita ficar recarregando a página (para isso tem que passar o e: FormEvent)
-
-  //   if ((!data_agend) || (!hora_agend)) {
-  //     alert('Data e Hora precisam ser preenchidos!');
-  //     return;
-  //   }
-   
-  //   api.post('agendamentos', {
-  //     usuario_agend,
-  //     organizacao_agend,
-  //     atendimento_agend,
-  //     colaborador_agend,
-  //     data_agend,
-  //     hora_agend,
-  //     status_agend,
-  //     observacao_agend,
-  //     agend_anterior_agend
-  //   }).then(() => {     
-  //     alert('Agendamento realizado com sucesso!');  
-  //     // console.log(res);
-
-  //     history.push({
-  //       pathname: '/confirmacaoagendamento/',
-  //       state: { 
-  //         id: '12345',
-  //         descricao_org: "Bela Fashion",
-  //         descricao_atd: descricao_atd,
-  //         data_agend: data_agend,
-  //         hora_agend: hora_agend,
-  //       }
-  //     });
-
-  //   }).catch((error) => { 
-  //     if (error.response){
-  //       alert('Erro ao tentar realizar agendamento: ResponseError = ' + error.response);
-  //     } else if(error.request){
-  //       alert('Erro ao tentar realizar agendamento: RequestError = ' + error.response.request._response);
-  //     }else if(error.message){
-  //       alert('Erro ao tentar realizar agendamento: MessageError = ' + error.message);
-  //     }
-  //   });
-  // }
-
   async function handleChangeData(e: React.ChangeEvent<HTMLInputElement>) {
     setAgendamentosNaData([]);
     setShowHorarios(false); 
