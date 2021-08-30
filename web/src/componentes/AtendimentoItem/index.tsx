@@ -52,7 +52,7 @@ const AtendimentoItem: React.FC<AtendimentoItemProps> = ({ atendimento }) => {
         razaosocial_org: atendimento.razaosocial_org  // Marcos
       }
     });
-   }
+  }
 
   return (
 

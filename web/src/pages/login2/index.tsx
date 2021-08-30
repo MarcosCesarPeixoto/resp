@@ -1,5 +1,5 @@
 import { TextField, ThemeProvider, Button, createMuiTheme } from '@material-ui/core';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Cabecalho from '../../componentes/Cabecalho';
 import Titulo from '../../componentes/Titulo';
@@ -26,13 +26,18 @@ const theme = createMuiTheme({
   },
 });
 
-const Login = (props: any) => {
+const Login2 = (props: any) => {
 
+  const [path_retorno, setPathRetorno] = useState("");    
   const [email_usu, setEmailUsuario] = useState('');
   const [senha_usu, setSenhaUsuario] = useState('');
   const history = useHistory();
 
   let estaLogado = (localStorage.getItem('@resp/nomeusuario') !== null);
+  
+  useEffect(() => {
+      setPathRetorno(props.location.state.path_retorno);
+  }, []);  
 
   async function handleLogin(e: FormEvent ) {
     e.preventDefault(); 
@@ -62,70 +67,24 @@ const Login = (props: any) => {
       localStorage.setItem('@resp/idusuario', id_usu);
       localStorage.setItem('@resp/emailusuario', email_usu);
 
-      history.push('/listaorganizacoes');
+      estaLogado = (localStorage.getItem('@resp/nomeusuario') !== null);
+      if(estaLogado) {
+        if(path_retorno){
+          history.goBack();
+        }  
+      }
 
-      window.location.reload();
+      // window.location.reload();
     }catch{
       alert('Usuário ou senha inválido!'); 
     }  
-
-    // await api.get('login', {
-    //   params: {
-    //     email_usu,
-    //     senha_usu
-    // }}).catch((err) => {
-    //   if(err.response){
-    //     setStatus({
-    //       type: 'error',
-    //       mensagem: err.response.data.mensagem
-    //     });
-    //   }else{
-    //     setStatus({
-    //       type:'error',
-    //       mensagem: 'Erro: Tente mais tarde!'
-    //     });
-    //   }
-    // })
   }
-
-  async function handleLogout(e: FormEvent ) {
-    if(estaLogado){
-      localStorage.removeItem('@resp/nomeusuario');
-      localStorage.removeItem('@resp/idusuario');
-      localStorage.removeItem('@resp/emailusuario');
-      window.location.reload();
-    }
-  }
-
-  estaLogado = (localStorage.getItem('@resp/nomeusuario') !== null);
-
-  if(estaLogado){
-    return (
-      <div id="login" className="container-logout"> 
-        <Cabecalho />
-        <br></br>    
-        <br></br>    
-        <Titulo titulo="Deseja mesmo fazer logout?" />; 
-
-        <form className="formulario-logout" onSubmit={handleLogout}>
-          <div className="input-block">
-            <br></br>          
-            <ThemeProvider theme={theme}>
-                <Button type="submit" variant="contained" color="primary" style={{ borderRadius: 50 }} className="botao" >
-                  Logout
-                </Button>
-            </ThemeProvider>
-          </div>  
-        </form>
-      </div> 
-    )  
-  } 
 
   return (
     <div id="login" className="container-login">
       
       <Cabecalho />  
-      <Titulo titulo="Faça seu login" />; 
+      <Titulo titulo="Para prosseguir fFaça seu login" />; 
 
       <form onSubmit={handleLogin}>
         <div className="input-block">
@@ -176,4 +135,4 @@ const Login = (props: any) => {
 
 };
 
-export default Login;
+export default Login2;

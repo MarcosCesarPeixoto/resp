@@ -43,7 +43,6 @@ function Cabecalho() {
 
             <div id="nome_usuario">
               <NomeUsuario />
-              {/* <span>Carlos Drumond de Andrade</span> */}
             </div>
             
             <div id="Sair" className="button-sair">
@@ -61,8 +60,6 @@ function Cabecalho() {
             <li><Link to="/listaorganizacoes">Buscar Atendimentos</Link></li>
             <li><a href="url#">Meu Cadastro</a></li>
             <li><a href="url">Contato</a></li>
-            {/* <li><a href="/login">Entrar</a></li> */}
-            {/* <li><a href="/login"> {estaLogado ? Sair : Entrar} </a> */}
             <EntrarSair /> 
         </ul>
       </nav>

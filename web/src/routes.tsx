@@ -15,6 +15,7 @@ import ListaAgendamentosDados from './pages/listaagendamentosdados';
 
 
 import Login from './pages/login';
+import Login2 from './pages/login2';
 
 function Routes() {
   return (
@@ -33,6 +34,7 @@ function Routes() {
       <Route path="/listaagendamentosdados" component={ListaAgendamentosDados} />
 
       <Route path="/login" component={Login} />
+      <Route path="/login2" component={Login2} />
 
     </BrowserRouter>
   );

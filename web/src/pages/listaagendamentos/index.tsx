@@ -9,7 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import Cabecalho from "../../componentes/Cabecalho";
 
-import AgendamentoItem, { Agendamento } from '../../componentes/AgendamentoItem';
+// import AgendamentoItem, { Agendamento } from '../../componentes/AgendamentoItem';
 
 import './styles.css';
 
@@ -57,6 +57,20 @@ function ListaAgendamentos() {
     Confirmado: true,
     Realizado: true
   });
+
+
+  useEffect(() => {
+    const nome_usuario = localStorage.getItem('@resp/nomeusuario');
+    const estaLogado = (nome_usuario !== null);
+    if (!estaLogado){
+      history.push({
+        pathname: '/login2',
+        state: {
+          path_retorno: '/listaagendamentos',
+        }
+      });
+    }    
+  }, []);
 
   const handleChange = (event: any) => {
     setState({ ...status, [event.target.name]: event.target.checked });

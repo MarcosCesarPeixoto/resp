@@ -39,7 +39,6 @@ const ListaAtendimentos: React.FC = () => {
   }
 
   useEffect(() => {
-      // testar aqui se dá pra redirecionar para login e voltar para buscaatendimentos
       buscaAtendimentos();
   }, []);
 

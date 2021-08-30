@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Atendimento } from '../../componentes/AtendimentoItem';  
@@ -59,10 +59,6 @@ export interface Agendamento {
   agend_anterior_agend: string;
 }
 
-// interface AgendamentoItemProps {
-//   agendamento: Agendamento;
-// }
-
 const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   
   const history = useHistory();  
@@ -93,10 +89,8 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
       }
     });
 
-    // Postar no stackOverFlow - Pq se passar "horarios = await atualizarHorariosDisponiveis(agendamentosNaData);" fica desatualizado, sempre um registro atrás o processamento
     setAgendamentosNaData(response.data); 
     horarios = atualizarHorariosDisponiveis(response.data);
-    // outra postagem, porque se colocar "horarios = await atualizarHorariosDisponiveis(response.data);" dá mensagem: 'await' has no effect on the type of this expression
 
     return true;
   }
@@ -218,13 +212,31 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
     );
   }
 
+  useEffect(() => {
+    const nome_usuario = localStorage.getItem('@resp/nomeusuario');
+    const id_usuario   = localStorage.getItem('@resp/idusuario');
+    // const estaLogado = (nome_usuario !== null);
+    const estaLogado = (id_usuario !== null);
+    if (estaLogado) {
+      console.log(id_usuario);
+      setUsuarioAgend( parseInt(id_usuario, 10));
+    } else {  
+      history.push({
+        pathname: '/login2',
+        state: {
+          path_retorno: '/cadastroagendamento',
+        }
+      });
+    }    
+  }, []);
+
   return (
     <div id="cadastro-agendamento" className="container-cadastroagendamento">
       <Cabecalho />
 
       <main className="container-cadastroagendamento">
         <form onSubmit={handleIncluirAgendamento}>
-          <fieldset className="container-form">
+          {/* <fieldset className="container-form"> */}
             <h2 className="titulo">Agendamento</h2>
 
             <div className="input-block" >
@@ -280,7 +292,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
               </ThemeProvider>
             </div>
 
-          </fieldset>
+          {/* </fieldset> */}
         </form>
       </main>
     </div>
