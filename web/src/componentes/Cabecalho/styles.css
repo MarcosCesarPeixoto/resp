@@ -1,6 +1,6 @@
 .container {
 	height: 100%;
-	background: whitesmoke;	
+	background: whitesmoke;			
 	display: grid;
 	width: 754px; 
 	grid-template-columns: 1fr;	

@@ -8,7 +8,8 @@
   --color-azul: #04546E;
   --color-cinza: #8d8d8d;
   --color-cinza-claro: #C7B7B7;
-  --color-cinza-maisclaro: #dad6d6;
+  /* --color-cinza-maisclaro: #dad6d6;  */
+  --color-cinza-maisclaro: #f8f0f0; 
 
   --primary-light: #757ce8;
   --primary-main: #228B22;

@@ -62,7 +62,7 @@ function CadastroUsuario () {
 
       <main className="container-cadastrousuario">
         <form onSubmit={handleIncluirUsuario}>
-          <fieldset className="container-form">
+          {/* <fieldset className="container-form"> */}
             {/* <legend className="titulo" >Cadastro de Usuário</legend> */}
             <h2 className="titulo">Cadastro de Usuário</h2>
             
@@ -108,7 +108,7 @@ function CadastroUsuario () {
               </ThemeProvider>
             </div>
 
-          </fieldset>
+          {/* </fieldset> */}
         </form>
       </main>
 

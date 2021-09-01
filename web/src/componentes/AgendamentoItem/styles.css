@@ -1,12 +1,12 @@
 .agendamento-item {  
   padding: 0.5rem 0 0.5rem 0;
-  background: var(--color-cinza-maisclaro);  
+  /* background: var(--color-cinza-maisclaro);   */
+  background:   var(--color-cinza-maisclaro);
   border: 1px solid var(--color-cinza);  
   border-radius: 3rem;
   margin-top: 0.5rem;
   width: 45em;
   box-shadow: 0em 0.2em 0.2em var(--color-cinza-maisclaro);  
-  /* cursor: none; */
 }
 
 .agendamento-item header {

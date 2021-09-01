@@ -61,15 +61,21 @@ function ListaAgendamentos() {
 
   useEffect(() => {
     const nome_usuario = localStorage.getItem('@resp/nomeusuario');
+    const id_usuario = JSON.parse(localStorage.getItem('@resp/idusuario') || '{}');
+    console.log(id_usuario);
+
     const estaLogado = (nome_usuario !== null);
-    if (!estaLogado){
+    if (estaLogado) {
+      let idusuario = parseInt(id_usuario);
+      setUsuarioAgend(idusuario);
+    } else {
       history.push({
         pathname: '/login2',
         state: {
           path_retorno: '/listaagendamentos',
         }
       });
-    }    
+    } 
   }, []);
 
   const handleChange = (event: any) => {
@@ -119,7 +125,6 @@ function ListaAgendamentos() {
       pathname: '/listaagendamentosdados/',
       state: response.data
     });
-
   }
 
   const location = useLocation();

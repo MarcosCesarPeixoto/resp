@@ -213,13 +213,14 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
   }
 
   useEffect(() => {
-    const nome_usuario = localStorage.getItem('@resp/nomeusuario');
-    const id_usuario   = localStorage.getItem('@resp/idusuario');
-    // const estaLogado = (nome_usuario !== null);
-    const estaLogado = (id_usuario !== null);
+    const nome_usuario = localStorage.getItem('@resp/nomeusuario');    
+    const id_usuario = JSON.parse(localStorage.getItem('@resp/idusuario') || '{}');
+    console.log(id_usuario);
+
+    const estaLogado = (nome_usuario !== null);
     if (estaLogado) {
-      console.log(id_usuario);
-      setUsuarioAgend( parseInt(id_usuario, 10));
+      let idusuario = parseInt(id_usuario);
+      setUsuarioAgend(idusuario);
     } else {  
       history.push({
         pathname: '/login2',

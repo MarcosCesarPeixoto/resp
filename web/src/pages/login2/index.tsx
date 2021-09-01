@@ -84,7 +84,7 @@ const Login2 = (props: any) => {
     <div id="login" className="container-login">
       
       <Cabecalho />  
-      <Titulo titulo="Para prosseguir fFaça seu login" />; 
+      <Titulo titulo="Para prosseguir é necessário fazer seu login" />; 
 
       <form onSubmit={handleLogin}>
         <div className="input-block">

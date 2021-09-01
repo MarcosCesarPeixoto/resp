@@ -11,7 +11,8 @@
 
 .titulo-container {  
   padding-top: 10px;
-  background: var(--color-background);
+  /* background: var(--color-background); */
+	background: whitesmoke;		  
   width:600px;
   text-align: center;  
 }
