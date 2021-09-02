@@ -9,12 +9,12 @@
 }
 
 .atendimento-item header {
-  /* color: blueviolet; */
   padding: 0rem 0rem;
   display: grid;
   grid-auto-flow: column;  
   grid-template-columns: 15% auto 15%;
   align-items: left;
+  color: var(--color-azul);
 }
 
 .atendimento-item img {
@@ -27,11 +27,11 @@
   padding: 5px 10px 0px 10px;
   margin-left: 0.5rem;  
   text-align: justify;
+  
 }
 
-#atendimento-valor {
-  color: rgb(34, 34, 243);    
-  /* color: rgb(24, 139, 233); */
+#atendimento-valor {  
+  color: var(--color-azul);  
   text-align: center;
   margin: 35px -10px;
 }

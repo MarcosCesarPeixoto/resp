@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { Atendimento } from '../../componentes/AtendimentoItem';  
 import Cabecalho from '../../componentes/Cabecalho';
+import Voltar from '../../componentes/Voltar';
 
 import api from '../../services/api';
 
@@ -238,8 +239,7 @@ const CadastroAgendamento: React.FC<AtendimentoItemProps> = ({atendimento}) => {
       <main className="container-cadastroagendamento">
         <form onSubmit={handleIncluirAgendamento}>
           {/* <fieldset className="container-form"> */}
-            <h2 className="titulo">Agendamento</h2>
-
+            <Voltar titulo={"Agendamento"} />
             <div className="input-block" >
               <TextField 
                 id="atendimento_agend" 

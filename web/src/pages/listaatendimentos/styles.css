@@ -3,20 +3,26 @@
   --color-background: #F0F0F7;  
   --color-preto: #000000;
   --color-azul: #04546E;
-  /* --color-cinza: #707070; */
   --color-cinza: #8d8d8d;
   --color-cinza-claro: #C7B7B7;
   --color-cinza-maisclaro: #dad6d6;
 }
 
-.container-lista-organizacao {  
+.container-lista-atendimentos {  
   background: whitesmoke;	
-  /* background:red;	 */
   padding: 1.4rem 1rem;
   display: grid;
 	align-items: center;
 	width: 754px; 
   height: 100%;
+}
+
+.container-topo{
+  background-color: red;
+  width:700px;
+  /* height: 32px; */
+  grid-template-columns: 10% auto;	
+  grid-template-rows: auto;  
 }
 
 .container-pesquisa-organizacao{

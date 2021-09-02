@@ -14,7 +14,7 @@ import Cabecalho from "../../componentes/Cabecalho";
 import './styles.css';
 
 import { createMuiTheme, createStyles, makeStyles, TextField, Theme } from "@material-ui/core";
-import Titulo from "../../componentes/Titulo";
+import Voltar from "../../componentes/Voltar";
 import api from "../../services/api";
 
 const theme = createMuiTheme({
@@ -138,7 +138,7 @@ function ListaAgendamentos() {
       <form id="buscar-lista-agendamentos" onSubmit={ buscarListaAgendamentos }>
 
         <Cabecalho />
-        <Titulo titulo="Lista de Agendamentos" />;
+        <Voltar titulo="Lista de Agendamentos" />;
 
         <div id="page-lista-agendamentos" className="container-lista-agendamentos">
           <div className="input-block">

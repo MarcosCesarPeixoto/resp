@@ -7,6 +7,8 @@ import Cabecalho from '../../componentes/Cabecalho';
 import Destaque from '../../componentes/Destaque';
 import OrganizacaoDados from '../../componentes/OrganizacaoDados';
 import AtendimentoItem, { Atendimento } from '../../componentes/AtendimentoItem';
+import Voltar from "../../componentes/Voltar";
+// import './styles.css'
 
 export interface Organizacao {
   id_org: number;
@@ -26,6 +28,7 @@ export interface Organizacao {
 
 const ListaAtendimentos: React.FC = () => {
   const titulo = "Selecione o atendimento desejado"; 
+  const menstopo = "Atendido por";
   const { state }  = useLocation<Organizacao>();  
   const [atendimentos, setAtendimentos] = useState([]); // Criando uma lista vazia 
 
@@ -43,8 +46,9 @@ const ListaAtendimentos: React.FC = () => {
   }, []);
 
   return (
-    <div>      
+    <div className="container-lista-atendimentos"> 
       <Cabecalho />
+      <Voltar titulo={menstopo} />
       <OrganizacaoDados organizacao={ state } /> 
       <Destaque titulo={titulo} /> 
       <form id="lista-atendimentos" >

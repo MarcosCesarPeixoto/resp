@@ -6,6 +6,7 @@
   width:600px;
   box-shadow: 0em 0.1em 0.4em var(--color-cinza);  
   cursor: pointer;
+  color: var(--color-azul);
 }
 
 .organizacao-item header {

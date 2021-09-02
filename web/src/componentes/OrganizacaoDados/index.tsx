@@ -1,4 +1,5 @@
 import React from "react";
+import Voltar from "../../componentes/Voltar";
 import './styles.css';
 
 interface OrganizacaoProps {
@@ -22,7 +23,7 @@ interface OrganizacaoProps {
 const OrganizacaoDados: React.FC<OrganizacaoProps> = ({ organizacao }) => {
   let ExibirLogoOrganizacao = (organizacao.logomarca_org);
   return (
-    <div className="organizacao-dados">
+    <div className="organizacao-dados">      
       <header> 
         {ExibirLogoOrganizacao && <img src={organizacao.logomarca_org} alt={organizacao.razaosocial_org}/>}
         <div>

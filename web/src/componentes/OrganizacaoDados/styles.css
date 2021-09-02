@@ -7,6 +7,7 @@
   margin-top: 0rem;
   width:600px;
   box-shadow: 0em 0.1em 0.4em var(--color-cinza);    
+  color: var(--color-azul);
 }
 
 .organizacao-dados header {

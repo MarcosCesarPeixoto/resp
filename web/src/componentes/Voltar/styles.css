@@ -1,0 +1,43 @@
+.container-voltar-mensagem{
+  background: whitesmoke;	
+  width: 754px; 
+  height: 100%;
+  padding: 0.2rem 1rem 0.5rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  align-items: left;
+  text-align: center;  
+}
+
+.button_voltar{
+  height: 2em;
+  cursor: pointer;
+}
+
+.titulo-container {
+	font-size: x-large;
+	font-weight: bold;  
+  color: var(--color-azul);  
+}
+
+@media (max-width: 755px){
+
+	.container-voltar-mensagem {
+		width: 95%;
+	}	
+
+  .atendimento-item img {
+    /* visibility: false; */
+    width: auto;
+  }
+}
+
+@media (max-width: 600px){
+
+	.container-voltar-mensagem {
+		width: 95%;
+	}	
+
+
+}

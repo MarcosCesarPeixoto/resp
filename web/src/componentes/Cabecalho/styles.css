@@ -35,6 +35,15 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+#usuario{
+	font-size: small;
+	font-weight: bold;
+}
+
+#nome_usuario{
+	font-size: small;
+}
+
 #menu-h{	
 	background-color: rgba(4,84,110,1);	
 	width: 754px;	

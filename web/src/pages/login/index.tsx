@@ -2,7 +2,7 @@ import { TextField, ThemeProvider, Button, createMuiTheme } from '@material-ui/c
 import React, { FormEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Cabecalho from '../../componentes/Cabecalho';
-import Titulo from '../../componentes/Titulo';
+import Voltar from '../../componentes/Voltar';
 import api from "../../services/api";
 
 import './styles.css';
@@ -105,7 +105,7 @@ const Login = (props: any) => {
         <Cabecalho />
         <br></br>    
         <br></br>    
-        <Titulo titulo="Deseja mesmo fazer logout?" />; 
+        <Voltar titulo="Deseja mesmo fazer logout?" />; 
 
         <form className="formulario-logout" onSubmit={handleLogout}>
           <div className="input-block">
@@ -125,7 +125,7 @@ const Login = (props: any) => {
     <div id="login" className="container-login">
       
       <Cabecalho />  
-      <Titulo titulo="Faça seu login" />; 
+      <Voltar titulo="Faça seu login" />; 
 
       <form onSubmit={handleLogin}>
         <div className="input-block">
